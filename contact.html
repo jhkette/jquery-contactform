@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="contact.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Oswald|Source+Sans+Pro');
+ </style>
+</head>
+
+<body>
+    <nav class="main-nav">
+        <nav class="navcontainer">
+            <h2>Diabetes assessment tool</h2>
+            <nav class="leftnav">
+                <nav class="contact-nav">
+                    <h2><a href="index.html">Home</a></h2>
+                </nav>
+                <nav class="contact-nav" id="current">
+                    <h2><a href="contact.html">Contact</a></h2>
+                </nav>
+            </nav>
+        </nav>
+    </nav>
+    <main class="contact-form-body">
+
+
+        <div class="container-white">
+
+            <div class="formcontainer">
+                <h3>Contact us</h3>
+
+                <div class="tool">
+                    <div class="questionmark" id="qmark">
+
+                    </div>
+                    <div class="tooltip" id="ttip">If you do not know your ZHA number please contact your GP</div>
+                </div>
+
+                <form id="userInfo" method="post" action="" class="contact-form" novalidate>
+
+
+                    <label class="label" for="name">First Name *</label>
+                    <div class="forminput">
+                        <input id="first-name" class="input-text focusgreen" type="text">
+
+                        <div id="first-nameError" class="error">&nbsp;</div>
+                    </div>
+
+                    <label class="label" for="name">Name</label>
+                    <div class="forminput">
+                        <input id="second-name" class="input-text">
+
+                        <div id="second-nameError" class="error">&nbsp;</div>
+                    </div>
+
+
+                    <label class="label" for="">Title *</label>
+                    <div class="forminput">
+                        <select name="title" id="title" class="input-text">
+                            <option value="Mr">Mr</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="Ms">Ms</option>
+                        </select>
+                        <div class="error">&nbsp;</div>
+                    </div>
+
+
+                    <label class="label" for="email">E-mail *</label>
+                    <div class="forminput">
+                        <input id="email" class="input-text" type="email">
+
+                        <div id="emailError" class="error">&nbsp;</div>
+                    </div>
+
+
+                    <label class="label" for="message">Health Authority Number *</label>
+                    <div class="forminput">
+                        <input id="health" class="input-text" type="text">
+
+                        <div id="healthError" class="error">&nbsp;</div>
+                    </div>
+
+
+                    <label class="label" for="message">Telephone number</label>
+                    <div class="forminput">
+                        <input id="telephone" class="input-text" type="text">
+
+                        <div id="telephoneError" class="error">&nbsp;</div>
+                    </div>
+
+                    <input type="submit" id="Submit" value="Submit" class="button">
+
+                    <div id="submitError" class="error">&nbsp;</div>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+
+</body>
+
+</html>
