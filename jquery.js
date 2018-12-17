@@ -9,33 +9,39 @@ turn validate or report errors. */
 
 function start() {
 
-    firstNameHint();
-    secondNameHint();
-    healthHint();
+    // firstNameHint();
+    // secondNameHint();
+    // healthHint();
     loadEventListeners();
-    switchToolTip();
+    // switchToolTip();
+    $('#first-name').blur(validateFirstName);
+    $('#second-name').blur(validateSecondName);
+    $('#email').blur(validateEmail);
 }
 
 function loadEventListeners() {
-    var email = $( "#email" );
-    email.focus(function(){
-         email = $(this).id;
-         clearError(email);
-
-    });
-
-    var telephone= $( "#telephone" );
-    email.focus(function(){
-         email = $(this).id;
-         clearError(email);
-    });
-
-    // on blur events for these fields validate field
-    $('#telephone').blur = validateTelephone;
-    $('#email').blur = validateEmail;
-
-     // call processForm function on submit
-    $('#userInfo').submit = processForm;
+ //     var email = $( "#email" );
+ //     email.focus(function(){
+ //         email = $(this).id;
+ //          clearError(email);
+ //
+ // });
+ //
+ // var telephone= $( "#telephone" );
+ // email.focus(function(){
+ //          email = $(this).id;
+ //         clearError(email);
+ //    });
+ //
+ //
+ //
+ //
+ //
+ //     $('#telephone').blur = validateTelephone;
+ //     $('#email').blur = validateEmail;
+ //
+ //      // call processForm function on submit
+ //     $('#userInfo').submit = processForm;
 }
 
 
@@ -46,21 +52,82 @@ function validateFirstName() {
     var defaultText = "Enter your name.";
     var valid = true;
     var firstNameField = $('#first-name');
-    var firstName = $('#first-name').value;
+    var firstName = $('#first-name').val();
     console.log(firstName);
     /* first name contain only letters and is at least two charecters long, case insensitive  */
     var re = new RegExp(/^[a-z]{2,}$/i);
     if (re.test(firstName)) {
-        removeNameFocus();
-        removeRedError(firstNameField);
+        // removeNameFocus();
+        // removeRedError(firstNameField);
+        console.log('valid')
         return valid;
     } else {
         $('#first-nameError').append('error in the name field');
-        removeNameFocus();
-        addRedError(firstNameField);
+        console.log(' not valid')
+        // removeNameFocus();
+        // addRedError(firstNameField);
         if(firstName ==''){
-        firstNameHint()
+        // firstNameHint()
     }
         return valid = false;
     }
+}
+
+function validateSecondName() {
+
+    var defaultText = "Enter your name.";
+    var valid = true;
+    var secondNameField = $('#second-name');
+    var secondName = $('#second-name').val();
+    console.log(secondName);
+    /* first name contain only letters and is at least two charecters long, case insensitive  */
+    var re = new RegExp(/^[a-z-]{2,}$/i);
+    if (re.test(secondName)) {
+        // removeNameFocus();
+        // removeRedError(firstNameField);
+        console.log('valid')
+        return valid;
+    } else {
+        $('#second-nameError').append('error in the name field');
+        console.log(' not valid')
+        // removeNameFocus();
+        // addRedError(firstNameField);
+        if(secondName ==''){
+        // firstNameHint()
+    }
+        return valid = false;
+    }
+}
+
+function validateEmail(){
+
+    var valid = true;
+    var emailField = $('#email');
+    var email = $('#email').val();
+    console.log(email);
+    /* first name contain only letters and is at least two charecters long, case insensitive  */
+    var re = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
+    if (re.test(email)) {
+        // removeNameFocus();
+        // removeRedError(firstNameField);
+        console.log('valid')
+        return valid;
+    } else {
+        $('#emailError').append('error in the name field');
+        console.log(' not valid')
+        // removeNameFocus();
+        // addRedError(firstNameField);
+        if(email ==''){
+        // firstNameHint()
+    }
+        return valid = false;
+    }
+}
+
+
+
+
+function removeNameFocus(){
+    var firstNameField = document.getElementById('first-name');
+    firstNameField.classList.remove('focusgreen');
 }
