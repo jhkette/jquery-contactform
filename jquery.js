@@ -14,11 +14,28 @@ function start() {
     // healthHint();
     loadEventListeners();
     // switchToolTip();
-    $('#first-name').blur(validateFirstName);
-    $('#second-name').blur(validateSecondName);
+    firstNameHint();
+    secondNameHint();
+
+
+    // $('#second-name').blur(firstNameHint);
     $('#email').blur(validateEmail);
+
     $('#health').blur(validateHealth);
     $('#telephone').blur(validateTelephone);
+
+    var email = $('#email');
+    email.focus(function(){
+       email = $(this);
+       clearError(email);
+    });
+
+    var telephone = $('#telephone');
+    telephone.focus(function(){
+       telephone = $(this);
+       clearError(telephone);
+    });
+
 }
 
 function loadEventListeners() {
@@ -92,6 +109,7 @@ function validateSecondName() {
     } else {
         $('#second-nameError').append('error in the name field');
         console.log(' not valid')
+
         // removeNameFocus();
         // addRedError(firstNameField);
         if(secondName ==''){
@@ -152,7 +170,80 @@ function validateHealth(){
     }
 }
 
+function firstNameHint() {
 
+    var defaultText = "Enter your name.";
+    var txtElem = $("#first-name");
+    txtElem.val(defaultText);
+    txtElem.css('color', '#A8A8A8');
+    txtElem.css('fontStyle', "italic");
+
+
+    txtElem.focus(function() {
+        //the value being operated on
+          removeNameFocus();
+        if ($(this).val() == defaultText) {
+            console.log('HELLLLLLO');
+            $(this).val("");
+            $(this).val("");
+            $(this).css('color', '#000000');
+            $(this).css('font-style', 'normal');
+        }
+
+        textElemId = $(this);
+        clearError(textElemId);
+    });
+    txtElem.blur(function() {
+        if ($(this).val() == "") {
+            $(this).val(defaultText);
+            $(this).css('color', '#A8A8A8');
+            $(this).css('fontStyle', "italic");
+        }
+        validateFirstName();
+    });
+}
+
+
+function secondNameHint() {
+
+    var defaultText = "Enter your name.";
+    var txtElem = $("#second-name");
+
+    txtElem.val(defaultText);
+
+
+    txtElem.css('color', '#A8A8A8');
+    txtElem.css('fontStyle', "italic");
+
+
+    txtElem.focus(function() {
+        //the value being operated on
+
+        if ($(this).val() == defaultText) {
+            console.log('HELLLLLLO');
+            $(this).val("");
+            $(this).val("");
+            $(this).css('color', '#000000');
+            $(this).css('font-style', 'normal');
+        }
+
+        textElemId = $(this);
+        clearError(textElemId);
+    });
+    txtElem.blur(function() {
+        if ($(this).val() == "") {
+            $(this).val(defaultText);
+            $(this).css('color', '#A8A8A8');
+            $(this).css('fontStyle', "italic");
+        }
+        validateSecondName();
+    });
+}
+
+function clearError(id) {
+    $('#'+$(id).attr('id')+'Error').html("&nbsp;");
+
+}
 
 function validateTelephone(){
 
@@ -183,6 +274,6 @@ function validateTelephone(){
 
 
 function removeNameFocus(){
-    var firstNameField = document.getElementById('first-name');
-    firstNameField.classList.remove('focusgreen');
+    var firstNameField = $('#first-name');
+    firstNameField.removeClass('focusgreen');
 }
