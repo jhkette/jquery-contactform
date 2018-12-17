@@ -9,19 +9,20 @@ turn validate or report errors. */
 
 function start() {
 
-    // firstNameHint();
-    // secondNameHint();
-    // healthHint();
+
     loadEventListeners();
-    // switchToolTip();
+
     firstNameHint();
     secondNameHint();
+    healthHint();
+     switchToolTip();
+
+}
 
 
-    // $('#second-name').blur(firstNameHint);
+
+function loadEventListeners() {
     $('#email').blur(validateEmail);
-
-    $('#health').blur(validateHealth);
     $('#telephone').blur(validateTelephone);
 
     var email = $('#email');
@@ -36,32 +37,8 @@ function start() {
        clearError(telephone);
     });
 
-}
+    }
 
-function loadEventListeners() {
- //     var email = $( "#email" );
- //     email.focus(function(){
- //         email = $(this).id;
- //          clearError(email);
- //
- // });
- //
- // var telephone= $( "#telephone" );
- // email.focus(function(){
- //          email = $(this).id;
- //         clearError(email);
- //    });
- //
- //
- //
- //
- //
- //     $('#telephone').blur = validateTelephone;
- //     $('#email').blur = validateEmail;
- //
- //      // call processForm function on submit
- //     $('#userInfo').submit = processForm;
-}
 
 
 
@@ -76,18 +53,16 @@ function validateFirstName() {
     /* first name contain only letters and is at least two charecters long, case insensitive  */
     var re = new RegExp(/^[a-z]{2,}$/i);
     if (re.test(firstName)) {
-        // removeNameFocus();
-        // removeRedError(firstNameField);
+        removeNameFocus();
+        removeRedError(firstNameField);
         console.log('valid')
         return valid;
     } else {
         $('#first-nameError').append('error in the name field');
         console.log(' not valid')
-        // removeNameFocus();
-        // addRedError(firstNameField);
-        if(firstName ==''){
-        // firstNameHint()
-    }
+         removeNameFocus();
+         addRedError(firstNameField);
+
         return valid = false;
     }
 }
@@ -103,18 +78,14 @@ function validateSecondName() {
     var re = new RegExp(/^[a-z-]{2,}$/i);
     if (re.test(secondName)) {
         // removeNameFocus();
-        // removeRedError(firstNameField);
+         removeRedError(secondNameField);
         console.log('valid')
         return valid;
     } else {
         $('#second-nameError').append('error in the name field');
         console.log(' not valid')
+        addRedError(secondNameField);
 
-        // removeNameFocus();
-        // addRedError(firstNameField);
-        if(secondName ==''){
-        // firstNameHint()
-    }
         return valid = false;
     }
 }
@@ -129,17 +100,15 @@ function validateEmail(){
     var re = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
     if (re.test(email)) {
         // removeNameFocus();
-        // removeRedError(firstNameField);
+        removeRedError(emailField);
         console.log('valid')
         return valid;
     } else {
         $('#emailError').append('error in the name field');
         console.log(' not valid')
         // removeNameFocus();
-        // addRedError(firstNameField);
-        if(email ==''){
-        // firstNameHint()
-    }
+         addRedError(emailField);
+
         return valid = false;
     }
 }
@@ -154,18 +123,16 @@ function validateHealth(){
     /* first name contain only letters and is at least two charecters long, case insensitive  */
     var re = new RegExp(/^zha\d{6}$/i);
     if (re.test(health)) {
-        // removeNameFocus();
-        // removeRedError(firstNameField);
+
+        removeRedError(healthField);
         console.log('valid')
         return valid;
     } else {
         $('#healthError').append('error in the name field');
         console.log(' not valid')
-        // removeNameFocus();
-        // addRedError(firstNameField);
-        if(email ==''){
-        // firstNameHint()
-    }
+
+       addRedError(healthField);
+
         return valid = false;
     }
 }
@@ -182,8 +149,8 @@ function firstNameHint() {
     txtElem.focus(function() {
         //the value being operated on
           removeNameFocus();
+
         if ($(this).val() == defaultText) {
-            console.log('HELLLLLLO');
             $(this).val("");
             $(this).val("");
             $(this).css('color', '#000000');
@@ -240,40 +207,97 @@ function secondNameHint() {
     });
 }
 
-function clearError(id) {
-    $('#'+$(id).attr('id')+'Error').html("&nbsp;");
+function healthHint() {
 
+    var defaultText = "Enter your name.";
+    var txtElem = $("#health");
+
+    txtElem.val(defaultText);
+
+
+    txtElem.css('color', '#A8A8A8');
+    txtElem.css('fontStyle', "italic");
+
+
+    txtElem.focus(function() {
+        //the value being operated on
+
+        if ($(this).val() == defaultText) {
+            console.log('HELLLLLLO');
+            $(this).val("");
+            $(this).val("");
+            $(this).css('color', '#000000');
+            $(this).css('font-style', 'normal');
+        }
+
+        textElemId = $(this);
+        clearError(textElemId);
+    });
+    txtElem.blur(function() {
+        if ($(this).val() == "") {
+            $(this).val(defaultText);
+            $(this).css('color', '#A8A8A8');
+            $(this).css('fontStyle', "italic");
+        }
+        validateHealth();
+    });
 }
+
+
 
 function validateTelephone(){
 
     var valid = true;
-    var healthField = $('#telephone');
-    var health = $('#telephone').val();
-    console.log(health);
+    var telephoneField = $('#telephone');
+    var telephone = $('#telephone').val();
+
     /* first name contain only letters and is at least two charecters long, case insensitive  */
     var re = new RegExp(/^\d{11}$/i);
     if (re.test(telephone)) {
         // removeNameFocus();
-        // removeRedError(firstNameField);
+        removeRedError(telephoneField);
         console.log('valid')
         return valid;
     } else {
         $('#telephoneError').append('error in the name field');
         console.log(' not valid')
         // removeNameFocus();
-        // addRedError(firstNameField);
-        if(email ==''){
-        // firstNameHint()
-    }
+         addRedError(telephoneField);
+
         return valid = false;
     }
 }
 
+function clearError(id) {
+    $('#'+$(id).attr('id')+'Error').html("&nbsp;");
 
+}
 
 
 function removeNameFocus(){
     var firstNameField = $('#first-name');
     firstNameField.removeClass('focusgreen');
+}
+
+
+function switchToolTip() {
+  $('#qmark').mouseover(function() {
+  var toolTip = $('#ttip');
+  toolTip.css('opacity', '1' );
+});
+   $('#qmark').mouseout(function() {
+  var toolTip = $('#ttip');
+  toolTip.css('opacity', '0' );
+ });
+}
+
+
+function addRedError(field){
+
+     field.addClass('backgroundred');
+}
+
+function removeRedError(field){
+
+     field.removeClass('backgroundred');
 }
