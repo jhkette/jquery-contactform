@@ -17,6 +17,8 @@ function start() {
     $('#first-name').blur(validateFirstName);
     $('#second-name').blur(validateSecondName);
     $('#email').blur(validateEmail);
+    $('#health').blur(validateHealth);
+    $('#telephone').blur(validateTelephone);
 }
 
 function loadEventListeners() {
@@ -114,6 +116,59 @@ function validateEmail(){
         return valid;
     } else {
         $('#emailError').append('error in the name field');
+        console.log(' not valid')
+        // removeNameFocus();
+        // addRedError(firstNameField);
+        if(email ==''){
+        // firstNameHint()
+    }
+        return valid = false;
+    }
+}
+
+
+function validateHealth(){
+
+    var valid = true;
+    var healthField = $('#health');
+    var health = $('#health').val();
+    console.log(health);
+    /* first name contain only letters and is at least two charecters long, case insensitive  */
+    var re = new RegExp(/^zha\d{6}$/i);
+    if (re.test(health)) {
+        // removeNameFocus();
+        // removeRedError(firstNameField);
+        console.log('valid')
+        return valid;
+    } else {
+        $('#healthError').append('error in the name field');
+        console.log(' not valid')
+        // removeNameFocus();
+        // addRedError(firstNameField);
+        if(email ==''){
+        // firstNameHint()
+    }
+        return valid = false;
+    }
+}
+
+
+
+function validateTelephone(){
+
+    var valid = true;
+    var healthField = $('#telephone');
+    var health = $('#telephone').val();
+    console.log(health);
+    /* first name contain only letters and is at least two charecters long, case insensitive  */
+    var re = new RegExp(/^\d{11}$/i);
+    if (re.test(telephone)) {
+        // removeNameFocus();
+        // removeRedError(firstNameField);
+        console.log('valid')
+        return valid;
+    } else {
+        $('#telephoneError').append('error in the name field');
         console.log(' not valid')
         // removeNameFocus();
         // addRedError(firstNameField);
