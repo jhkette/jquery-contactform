@@ -117,9 +117,10 @@ function processForm() {
     var lastName = validateSecondName();
     var email = validateEmail();
     var health = validateHealth();
-    clearError();
+    var telephone = validateTelephone();
 
-    if ((firstName == true) && (lastName == true) && (email == true) && (health == true))  {
+
+    if ((firstName == true) && (lastName == true) && (email == true) && (health == true) && (telephone == true))  {
         console.log('SUBMIT FORM');
         return false;
     }
@@ -283,22 +284,19 @@ function validateTelephone() {
 }
 
 /*This function clears each individual error on blur of the particular form field
-The id is passed as an argument to the function  
- */
+The id is passed as an argument to the function */
 function clearError(id) {
     $('#' + $(id).attr('id') + 'Error').html("&nbsp;");
 }
 
 /* I'm using this simple function to clear all errors which get called on submit.
-This also clears the submit error. Its the first thign to get called by the processForm
-function.
-
-It's far easier to select all items by class and change them in jquery.  */
+This also clears the submit error. Its the first thing to get called by the processForm
+function. It's far easier to select all items by class and change them in jquery.  */
 function clearAllErrors(){
     $( ".error" ).html("&nbsp;");
 }
 
-
+/* This remove the initial 'focus' on the first name field when the form is presented.   */
 function removeNameFocus() {
     var firstNameField = $('#first-name');
     firstNameField.removeClass('focusgreen');
