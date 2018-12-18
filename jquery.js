@@ -8,36 +8,32 @@ recalled or it's input removed. The other form inputs are listend for in load ev
 turn validate or report errors. */
 
 function start() {
-
-
     loadEventListeners();
-
     firstNameHint();
     secondNameHint();
     healthHint();
-     switchToolTip();
+    switchToolTip();
 
 }
-
-
 
 function loadEventListeners() {
     $('#email').blur(validateEmail);
     $('#telephone').blur(validateTelephone);
 
     var email = $('#email');
-    email.focus(function(){
-       email = $(this);
-       clearError(email);
+    email.focus(function() {
+        email = $(this);
+        clearError(email);
     });
 
     var telephone = $('#telephone');
-    telephone.focus(function(){
-       telephone = $(this);
-       clearError(telephone);
+    telephone.focus(function() {
+        telephone = $(this);
+        clearError(telephone);
     });
 
-    }
+    $('#userInfo').submit(processForm);
+}
 
 
 
@@ -60,8 +56,8 @@ function validateFirstName() {
     } else {
         $('#first-nameError').append('error in the name field');
         console.log(' not valid')
-         removeNameFocus();
-         addRedError(firstNameField);
+        removeNameFocus();
+        addRedError(firstNameField);
 
         return valid = false;
     }
@@ -78,7 +74,7 @@ function validateSecondName() {
     var re = new RegExp(/^[a-z-]{2,}$/i);
     if (re.test(secondName)) {
         // removeNameFocus();
-         removeRedError(secondNameField);
+        removeRedError(secondNameField);
         console.log('valid')
         return valid;
     } else {
@@ -90,7 +86,7 @@ function validateSecondName() {
     }
 }
 
-function validateEmail(){
+function validateEmail() {
 
     var valid = true;
     var emailField = $('#email');
@@ -107,14 +103,34 @@ function validateEmail(){
         $('#emailError').append('error in the name field');
         console.log(' not valid')
         // removeNameFocus();
-         addRedError(emailField);
+        addRedError(emailField);
 
         return valid = false;
     }
 }
 
+function processForm() {
+    event.preventDefault();
+    clearAllErrors();
 
-function validateHealth(){
+    var firstName = validateFirstName();
+    var lastName = validateSecondName();
+    var email = validateEmail();
+    var health = validateHealth();
+    clearError();
+
+    if ((firstName == true) && (lastName == true) && (email == true) && (health == true))  {
+        console.log('SUBMIT FORM');
+        return false;
+    }
+
+    else{
+        $('#submitError').html('There are errors in the form');
+     return false;
+    }
+}
+
+function validateHealth() {
 
     var valid = true;
     var healthField = $('#health');
@@ -125,13 +141,13 @@ function validateHealth(){
     if (re.test(health)) {
 
         removeRedError(healthField);
-        console.log('valid')
+        console.log('valid');
         return valid;
     } else {
         $('#healthError').append('error in the name field');
         console.log(' not valid')
 
-       addRedError(healthField);
+        addRedError(healthField);
 
         return valid = false;
     }
@@ -148,7 +164,7 @@ function firstNameHint() {
 
     txtElem.focus(function() {
         //the value being operated on
-          removeNameFocus();
+        removeNameFocus();
 
         if ($(this).val() == defaultText) {
             $(this).val("");
@@ -187,7 +203,7 @@ function secondNameHint() {
         //the value being operated on
 
         if ($(this).val() == defaultText) {
-            console.log('HELLLLLLO');
+
             $(this).val("");
             $(this).val("");
             $(this).css('color', '#000000');
@@ -211,7 +227,6 @@ function healthHint() {
 
     var defaultText = "Enter your name.";
     var txtElem = $("#health");
-
     txtElem.val(defaultText);
 
 
@@ -223,7 +238,6 @@ function healthHint() {
         //the value being operated on
 
         if ($(this).val() == defaultText) {
-            console.log('HELLLLLLO');
             $(this).val("");
             $(this).val("");
             $(this).css('color', '#000000');
@@ -245,7 +259,7 @@ function healthHint() {
 
 
 
-function validateTelephone(){
+function validateTelephone() {
 
     var valid = true;
     var telephoneField = $('#telephone');
@@ -262,42 +276,52 @@ function validateTelephone(){
         $('#telephoneError').append('error in the name field');
         console.log(' not valid')
         // removeNameFocus();
-         addRedError(telephoneField);
+        addRedError(telephoneField);
 
         return valid = false;
     }
 }
 
+/*This function clears each individual error on blur of the particular form field
+The id is passed as an argument to the function  
+ */
 function clearError(id) {
-    $('#'+$(id).attr('id')+'Error').html("&nbsp;");
+    $('#' + $(id).attr('id') + 'Error').html("&nbsp;");
+}
 
+/* I'm using this simple function to clear all errors which get called on submit.
+This also clears the submit error. Its the first thign to get called by the processForm
+function.
+
+It's far easier to select all items by class and change them in jquery.  */
+function clearAllErrors(){
+    $( ".error" ).html("&nbsp;");
 }
 
 
-function removeNameFocus(){
+function removeNameFocus() {
     var firstNameField = $('#first-name');
     firstNameField.removeClass('focusgreen');
 }
 
 
 function switchToolTip() {
-  $('#qmark').mouseover(function() {
-  var toolTip = $('#ttip');
-  toolTip.css('opacity', '1' );
-});
-   $('#qmark').mouseout(function() {
-  var toolTip = $('#ttip');
-  toolTip.css('opacity', '0' );
- });
+    $('#qmark').mouseover(function() {
+        var toolTip = $('#ttip');
+        toolTip.css('opacity', '1');
+    });
+    $('#qmark').mouseout(function() {
+        var toolTip = $('#ttip');
+        toolTip.css('opacity', '0');
+    });
 }
 
+function addRedError(field) {
 
-function addRedError(field){
-
-     field.addClass('backgroundred');
+    field.addClass('backgroundred');
 }
 
-function removeRedError(field){
+function removeRedError(field) {
 
-     field.removeClass('backgroundred');
+    field.removeClass('backgroundred');
 }
