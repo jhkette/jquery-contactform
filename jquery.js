@@ -37,25 +37,21 @@ function loadEventListeners() {
 
 
 
-
-
 function validateFirstName() {
 
     var defaultText = "Enter your name.";
     var valid = true;
     var firstNameField = $('#first-name');
     var firstName = $('#first-name').val();
-    console.log(firstName);
+
     /* first name contain only letters and is at least two charecters long, case insensitive  */
     var re = new RegExp(/^[a-z]{2,}$/i);
     if (re.test(firstName)) {
         removeNameFocus();
         removeRedError(firstNameField);
-        console.log('valid')
         return valid;
     } else {
         $('#first-nameError').append('error in the name field');
-        console.log(' not valid')
         removeNameFocus();
         addRedError(firstNameField);
 
@@ -69,17 +65,16 @@ function validateSecondName() {
     var valid = true;
     var secondNameField = $('#second-name');
     var secondName = $('#second-name').val();
-    console.log(secondName);
+
     /* first name contain only letters and is at least two charecters long, case insensitive  */
     var re = new RegExp(/^[a-z-]{2,}$/i);
     if (re.test(secondName)) {
         // removeNameFocus();
         removeRedError(secondNameField);
-        console.log('valid')
         return valid;
     } else {
         $('#second-nameError').append('error in the name field');
-        console.log(' not valid')
+
         addRedError(secondNameField);
 
         return valid = false;
@@ -91,17 +86,17 @@ function validateEmail() {
     var valid = true;
     var emailField = $('#email');
     var email = $('#email').val();
-    console.log(email);
+
     /* first name contain only letters and is at least two charecters long, case insensitive  */
     var re = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
     if (re.test(email)) {
         // removeNameFocus();
         removeRedError(emailField);
-        console.log('valid')
+
         return valid;
     } else {
         $('#emailError').append('error in the name field');
-        console.log(' not valid')
+
         // removeNameFocus();
         addRedError(emailField);
 
@@ -110,18 +105,19 @@ function validateEmail() {
 }
 
 function processForm() {
-    event.preventDefault();
+
     clearAllErrors();
 
     var firstName = validateFirstName();
     var lastName = validateSecondName();
     var email = validateEmail();
     var health = validateHealth();
-    var telephone = validateTelephone();
 
 
-    if ((firstName == true) && (lastName == true) && (email == true) && (health == true) && (telephone == true))  {
-        console.log('SUBMIT FORM');
+
+    if ((firstName == true) && (lastName == true) && (email == true) && (health == true))  {
+
+        toggleModal();
         return false;
     }
 
@@ -136,17 +132,17 @@ function validateHealth() {
     var valid = true;
     var healthField = $('#health');
     var health = $('#health').val();
-    console.log(health);
+
     /* first name contain only letters and is at least two charecters long, case insensitive  */
     var re = new RegExp(/^zha\d{6}$/i);
     if (re.test(health)) {
 
         removeRedError(healthField);
-        console.log('valid');
+
         return valid;
     } else {
         $('#healthError').append('error in the name field');
-        console.log(' not valid')
+
 
         addRedError(healthField);
 
@@ -271,11 +267,11 @@ function validateTelephone() {
     if (re.test(telephone)) {
         // removeNameFocus();
         removeRedError(telephoneField);
-        console.log('valid')
+
         return valid;
     } else {
         $('#telephoneError').append('error in the name field');
-        console.log(' not valid')
+
         // removeNameFocus();
         addRedError(telephoneField);
 
@@ -322,4 +318,27 @@ function addRedError(field) {
 function removeRedError(field) {
 
     field.removeClass('backgroundred');
+}
+
+
+
+function toggleModal() {
+    var modal = $(".modal");
+    modal.addClass("show-modal");
+    var closeButton = $(".close-button");
+
+    closeButton.click(removeModal);
+    $(window).click(windowOnClick);
+
+    function windowOnClick(event) {
+            if (event.target === modal) {
+                removeModal();
+            }
+        }
+    function removeModal(e){
+        var modal = $(".modal");
+        modal.removeClass("show-modal");
+
+    }
+
 }

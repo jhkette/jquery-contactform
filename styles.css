@@ -3,8 +3,8 @@
     --tertiary: #e2e2e2;
     --black: #212020;
     --red:  #fa8072;
-}
 
+}
 * {
     box-sizing: border-box;
     margin: 0;
@@ -15,9 +15,6 @@
 html {
     font-size: 62.5%;
 }
-li:nth-of-type(2) {
-    grid-row-end: span 4;
-}
 
 body {
     font-family: 'Source Sans Pro', 'helvtica', 'arial';
@@ -27,7 +24,7 @@ body {
 p {
     margin: 1.9rem 0;
     font-weight: 300;
-    font-size: 1.9rem
+    font-size: 1.8rem
 }
 
 h1 {
@@ -47,8 +44,9 @@ h2{
 }
 h3{
     font-family: 'Oswald','Helvetica neue', arial, sans-serif;
-    font-size: 4rem;
+    font-size: 3.5rem;
     border-bottom: 1px dashed var(--black);
+    text-transform: uppercase;
 
 }
 h4 {
@@ -284,30 +282,52 @@ h4 {
     }
 }
 
-/* HEADER */
+/* intro text display */
 .content {
-    display: grid;
-    grid-gap: 40px;
-    grid-template-columns: 2.5fr 1fr 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     padding: 9.5rem 0;
 
 }
 
-@media screen and (max-width: 960px) {
+.contentitems{
+    transition: all .5s;
+    flex: .75;
+}
+
+.open {
+    flex-grow: 2;
+
+}
+.open p{
+
+}
+
+/* @media screen and (max-width: 960px) {
     .content {
         grid-template-columns: 2fr 2fr;
     }
-}
+} */
 
 ol {
     counter-reset: listNumbering;
     list-style: none;
     padding: 0 1rem;
+    margin: auto;
 }
+ /* .contentitems > * {
+transition: transform 0.5s;
+ } */
+
 
 li {
     font-size: 1em;
     counter-increment: listNumbering;
+    width: 18rem;
+    margin: 2rem;
+    cursor: pointer;
+
 }
 
 li:before {
@@ -320,10 +340,7 @@ li:before {
     color: var(--black);
 }
 
-.home-image{
-    width: 25rem;
-    border: 15px solid var(--secondary);
-}
+
 
 .summary {
     color: var(--black);
@@ -352,28 +369,11 @@ li:before {
     height: 1.9rem;
 }
 
-@keyframes example {
-    0% {
-        left: 0;
-    }
-
-    50% {
-        left: 1.9rem;
-    }
-
-    75% {
-        right: 1.9rem;
-    }
-}
-
-.arrowlink:hover {
-    animation-name: example;
-    animation-duration: 1s;
-}
+/* END OF intro text display */
 
 .questionmark {
 
-   background-image: url(questionmark.svg);
+   background-image: url(images/questionmark.svg);
    background-size: 38px 38px;
     padding: 1em;
     background-repeat: no-repeat;
@@ -389,7 +389,7 @@ li:before {
   text-align: center;
   opacity: 0;
 
-  border-radius: 6px;
+  border-radius: .2rem;
    z-index: 1;
 
     font: 0.65em Arial, Helvetica, sans-serif;
@@ -397,7 +397,7 @@ li:before {
     position: absolute;
     right: 2rem;
 
-top: -8.3rem;
+top: -9rem;
 
 }
 .tooltip::after{
@@ -485,23 +485,62 @@ margin-left: -2.3rem;
     height: 3rem;
     align-self: flex-end;
     display: inline-block;
-    font-size: 1.9rem;
+    font-size: 1.8rem;
 }
 
 .backgroundred{
-    background-color: #fec1b8;
+    background-color: #f9e3df;
 }
-select{
-    font-size: 1.9rem;
+
+/*----------------- Select box dropdown styles -----------  */
+.select-style {
+    padding: 0;
+
+    border: 1px solid var(--black);
+    width: 8rem;
+    border-radius: .2rem;
+    overflow: hidden;
+    background-color: #fff;
+    height: 5rem;
+    background: #fff url("images/arrow-down-solid.svg") no-repeat 75% 50%;
+    background-size: 15px 15px;
+
 }
+
+
+.select-style select {
+    padding: .4rem;
+    width: 160%;
+    font-size: 1.7rem;
+    line-height: 1.5rem;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+
+}
+
+.select-style select:focus {
+    border:0px;
+    outline:0px;
+
+}
+
+/*-----------------end of Select box dropdown styles -----------  */
+
+
+
 input {
     border: 1px solid var(--black);
     height: 5rem;
     width: 23rem;
     /* margin: 10px 0 0 0; */
-    padding: 1%;
+    padding: .4rem;
     font-size: 1.8rem;
-    line-height: 1.5em;
+    line-height: 1.5rem;
     color: var(--black);
     letter-spacing: .01em;
     font-style: normal;
@@ -512,6 +551,53 @@ input {
     border-radius: .2rem;
 }
 
-.focusgreen {
-    background-color: #cdede6;
+.focus {
+    background-color: #f8ffd4;
 }
+
+
+/* ------------ popup css ---------------- */
+.modal {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(1.1);
+        /*transition for when the form closes */
+        transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+    }
+    .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 1rem 1.5rem;
+        width: 35rem;
+        height: 15rem;
+        border-radius: 0.1rem;
+        border: 3px solid var(--black);
+    }
+    .close-button {
+        float: right;
+        width: 1.5rem;
+        line-height: 1.5rem;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 0.25rem;
+        background-color: lightgray;
+    }
+    .close-button:hover {
+        background-color: darkgray;
+    }
+    .show-modal {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1.0);
+        transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+    }
+/* ------------ end of popup css ---------------- */

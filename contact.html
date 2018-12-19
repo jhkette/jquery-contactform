@@ -48,7 +48,7 @@
 
                     <label class="label" for="name">First Name *</label>
                     <div class="forminput">
-                        <input id="first-name" class="input-text focusgreen" type="text">
+                        <input id="first-name" class="input-text focus" type="text">
 
                         <div id="first-nameError" class="error">&nbsp;</div>
                     </div>
@@ -62,7 +62,7 @@
 
 
                     <label class="label" for="">Title *</label>
-                    <div class="forminput">
+                    <div class="forminput select-style">
                         <select name="title" id="title" class="input-text">
                             <option value="Mr">Mr</option>
                             <option value="Mrs">Mrs</option>
@@ -95,11 +95,22 @@
                         <div id="telephoneError" class="error">&nbsp;</div>
                     </div>
 
-                    <input type="submit" value="Submit" id="submit" class="button">
+                    <input type="submit" id="Submit" value="Submit" class="button">
 
                     <div id="submitError" class="error">&nbsp;</div>
+
                 </form>
+
+                <div class="modal">
+                    <div class="modal-content">
+                        <span class="close-button">&times;</span>
+                        <p>Thankyou. Your contact details have been registered.</p>
+                    </div>
+                </div>
+
+
             </div>
+
         </div>
 
     </main>
