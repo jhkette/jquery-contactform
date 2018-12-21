@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="jquery.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="contact.js"></script>
     <link rel="stylesheet" href="styles.css">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Oswald|Source+Sans+Pro');
@@ -30,43 +29,39 @@
     </nav>
     <main class="contact-form-body">
 
-
         <div class="container-white">
-
             <div class="formcontainer">
                 <h3>Contact us</h3>
-
                 <div class="tool">
                     <div class="questionmark" id="qmark">
-
                     </div>
                     <div class="tooltip" id="ttip">If you do not know your ZHA number please contact your GP</div>
                 </div>
+                <!-- I'm adding novalidate so validation is only done by js. Not by in built html5 validation -->
+                <form id="userInfo" action="post" class="contact-form" novalidate>
 
-                <form id="userInfo" method="post" action="" class="contact-form" novalidate>
-
-
-                    <label class="label" for="name">First Name *</label>
+                    <label class="label" for="first-name">First Name *</label>
                     <div class="forminput">
                         <input id="first-name" class="input-text focus" type="text">
 
                         <div id="first-nameError" class="error">&nbsp;</div>
                     </div>
 
-                    <label class="label" for="name">Name</label>
+                    <label class="label" for="second-name">Last Name *</label>
                     <div class="forminput">
                         <input id="second-name" class="input-text">
-
                         <div id="second-nameError" class="error">&nbsp;</div>
                     </div>
 
 
-                    <label class="label" for="">Title *</label>
+                    <label class="label" for="title">Title *</label>
                     <div class="forminput select-style">
                         <select name="title" id="title" class="input-text">
                             <option value="Mr">Mr</option>
                             <option value="Mrs">Mrs</option>
                             <option value="Ms">Ms</option>
+                            <option value="Miss">Miss</option>
+                            <option value="Master">Master</option>
                         </select>
                         <div class="error">&nbsp;</div>
                     </div>
@@ -75,28 +70,24 @@
                     <label class="label" for="email">E-mail *</label>
                     <div class="forminput">
                         <input id="email" class="input-text" type="email">
-
                         <div id="emailError" class="error">&nbsp;</div>
                     </div>
 
 
-                    <label class="label" for="message">Health Authority Number *</label>
+                    <label class="label" for="health">Health Authority Number *</label>
                     <div class="forminput">
                         <input id="health" class="input-text" type="text">
-
                         <div id="healthError" class="error">&nbsp;</div>
                     </div>
 
 
-                    <label class="label" for="message">Telephone number</label>
+                    <label class="label" for="telephone">Telephone number</label>
                     <div class="forminput">
                         <input id="telephone" class="input-text" type="text">
-
                         <div id="telephoneError" class="error">&nbsp;</div>
                     </div>
 
                     <input type="submit" id="Submit" value="Submit" class="button">
-
                     <div id="submitError" class="error">&nbsp;</div>
 
                 </form>
@@ -107,15 +98,15 @@
                         <p>Thankyou. Your contact details have been registered.</p>
                     </div>
                 </div>
-
-
             </div>
-
         </div>
-
     </main>
+    <div class="footercontainer">
+        <footer class="footer">
+
+        </footer>
+    </div>
 
 
 </body>
-
 </html>
