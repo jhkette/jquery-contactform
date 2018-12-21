@@ -554,6 +554,10 @@ input {
     background-color: #f8ffd4;
 }
 
+.red {
+    color: red;
+}
+
 /* ------------ popup css ---------------- */
 .modal {
     position: fixed;
