@@ -73,7 +73,6 @@ function validateSecondName() {
     /* last name contain only letters OR contains letters and '-' .  Is at least two charecters long, case insensitive   */
     var re = new RegExp(/^[a-z][a-z-]+$/i);
     if (re.test(secondName)) {
-
         removeRedError(secondNameField);
         return valid;
     } else {
@@ -121,6 +120,8 @@ function validateHealth() {
     }
 }
 
+/*Function to validate title. If the value which accords to an empty string
+is selected an error is thrown */
 function validateTitle(){
     var valid = true;
     var title = $('#title');
