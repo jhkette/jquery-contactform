@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="contact.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="jquery.js"></script>
     <link rel="stylesheet" href="styles.css">
     <style>
         @import url('https://fonts.googleapis.com/css?family=Oswald|Source+Sans+Pro');
@@ -19,7 +20,7 @@
             <h2>Diabetes assessment tool</h2>
             <nav class="leftnav">
                 <nav class="contact-nav">
-                    <h2><a href="index.html">Home</a></h2>
+                    <h2><a href="#">Home</a></h2>
                 </nav>
                 <nav class="contact-nav" id="current">
                     <h2><a href="contact.html">Contact</a></h2>
@@ -55,16 +56,20 @@
 
 
                     <label class="label" for="title">Title <span class="red">*</span></label>
-                    <div class="forminput select-style">
+                   <div class="forminput">
+                    <div class="select-style">
                         <select name="title" id="title" class="input-text">
+                            <option value=""> </option>
                             <option value="Mr">Mr</option>
                             <option value="Mrs">Mrs</option>
                             <option value="Ms">Ms</option>
                             <option value="Miss">Miss</option>
                             <option value="Master">Master</option>
                         </select>
-                        <div class="error">&nbsp;</div>
+
                     </div>
+                    <div id="titleError" class="error titleerror">&nbsp;</div>
+                </div>
 
 
                     <label class="label" for="email">E-mail <span class="red">*</span></label>

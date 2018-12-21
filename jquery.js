@@ -16,6 +16,7 @@ function start() {
 function loadEventListeners() {
     $('#email').blur(validateEmail);
     $('#telephone').blur(validateTelephone);
+    $('#title').blur(validateTitle);
 
     var email = $('#email');
     email.focus(function() {
@@ -28,7 +29,16 @@ function loadEventListeners() {
         telephone = $(this);
         clearError(telephone);
     });
+
+
+    var title = $('#title');
+    title.focus(function() {
+        title = $(this);
+        clearError(title);
+    });
+
     $('#userInfo').submit(processForm);
+
 }
 
 
@@ -111,6 +121,19 @@ function validateHealth() {
     }
 }
 
+function validateTitle(){
+    var valid = true;
+    var title = $('#title');
+    if(title.val() == "") {
+        $('#titleError').html('Enter your title');
+        valid = false;
+        return valid;
+    } else{
+        return valid;
+    }
+
+}
+
 // function to validate telephone
 function validateTelephone() {
 
@@ -140,8 +163,9 @@ function processForm() {
     var lastName = validateSecondName();
     var email = validateEmail();
     var health = validateHealth();
+    var title = validateTitle()
 
-    if ((firstName == true) && (lastName == true) && (email == true) && (health == true))  {
+    if ((firstName == true) && (lastName == true) && (email == true) && (title == true) && (health == true))  {
         toggleModal(); //modal is called if all the neccersary inputs are correct
         return false;
     }

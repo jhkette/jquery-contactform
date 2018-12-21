@@ -147,7 +147,7 @@ h4 {
 }
 
 .open p {
-    font-size: 2rem;
+    font-size: 2.2rem;
 }
 
 
@@ -400,7 +400,7 @@ li:before {
 /* -----------------tooltip ------------*/
 .tool {
     position: absolute;
-    top: 67rem;
+    top: 67.5rem;
     margin-left: -2.3rem;
 }
 
@@ -503,17 +503,17 @@ li:before {
 .select-style {
     padding: 0;
     border: 1px solid var(--black);
-    width: 8rem;
+    width: 10rem;
     border-radius: .2rem;
     overflow: hidden;
     background-color: #fff;
     height: 5rem;
-    background: #fff url("images/arrow-down-solid.svg") no-repeat 75% 50%;
+    background: #fff url("images/arrow-down-solid.svg") no-repeat 80% 55%;
     background-size: 15px 15px;
 }
 
 .select-style select {
-    padding: .4rem;
+    padding-top: 1.5rem;
     width: 160%;
     font-size: 1.7rem;
     line-height: 1.5rem;
