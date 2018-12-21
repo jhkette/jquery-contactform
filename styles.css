@@ -2,14 +2,21 @@
     --secondary: #5ec3b6;
     --tertiary: #e2e2e2;
     --black: #212020;
-    --red:  #fa8072;
-
+    --red: #fa8072;
 }
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     border: 0;
+}
+/* used to remove default background colours from chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+    background-color: white;
 }
 
 html {
@@ -21,8 +28,9 @@ body {
     font-size: 22px;
     font-weight: 500;
 }
+
 p {
-    margin: 1.9rem 0;
+    margin: 1.8rem 0;
     font-weight: 300;
     font-size: 1.8rem
 }
@@ -35,94 +43,191 @@ h1 {
     top: 18rem;
     right: 50rem;
 }
-h2{
+
+h2 {
     padding-top: 10px;
     color: white;
     font-size: 2.2rem;
     text-align: center;
     font-weight: 200;
 }
-h3{
-    font-family: 'Oswald','Helvetica neue', arial, sans-serif;
+
+h3 {
+    font-family: 'Oswald', 'Helvetica neue', arial, sans-serif;
     font-size: 3.5rem;
     border-bottom: 1px dashed var(--black);
     text-transform: uppercase;
-
 }
+
 h4 {
     padding-bottom: 3rem;
     font-size: 3rem
 }
 
 .row {
-    width: 80%;
+    width: 75%;
     margin: auto;
-    padding: 1.9rem;
+    padding: 1.8rem;
+    max-width: 1000px;
 }
 
-
-
-.contact-nav{
+/*---------------- Main navigation ------------- */
+.contact-nav {
     background-color: var(--secondary);
     width: 11rem;
-
-
 }
-.leftnav{
+
+.leftnav {
     display: flex;
 }
 
-.contact-nav a{
+.contact-nav a {
     text-decoration: none;
     color: var(--black);
 }
 
-.contact-nav:hover{
-    background-color: var(--tertiary);
-
-
-}
-#current{
+.contact-nav:hover {
     background-color: var(--tertiary);
 }
 
-.results {
+#current {
     background-color: var(--tertiary);
-    height: 16rem;
 }
 
-.results-message {
-    width: 80%;
-    margin: 1.9rem auto 0rem auto;
-    padding: 1.9rem 0;
-}
-
-.navcontainer{
-
+.navcontainer {
     margin: auto;
-    width: 80%;
+    width: 75%;
     display: flex;
     justify-content: space-between;
     height: 4.5rem;
+    max-width: 1000px;
 
-}
-
-.grey {
-    width: 100%;
-    height: 45rem;
-    background-image: linear-gradient(#5ec4b6, #0aaf97);
 }
 
 .main-nav {
-
     background-color: var(--black);
-
     width: 100%;
+}
+
+/*---------------- End of Main navigation ---------- */
+/* ---intro text numbers display--- */
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: 70rem;
+    padding-top: 5rem;
+    align-self: center;
+}
+
+.contentitems {
+    transition: all 1s;
+    flex: .8;
+    vertical-align: top;
+}
+
+.contentitems a {
+    vertical-align: top;
+    color: var(--black);
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+.contentitems a:hover {
+    text-decoration: underline;
+}
+
+.fa-arrow-right{
+    font-size: 2.2rem;
+    color: var(--black);
+}
+
+.open {
+    flex-grow: 2;
+}
+
+.open p {
+    font-size: 2rem;
+}
+
+
+ol {
+    counter-reset: listNumbering;
+    list-style: none;
+    padding: 0 1rem;
+    margin: auto;
+}
+
+
+li {
+    font-size: 1em;
+    counter-increment: listNumbering;
+    width: 18rem;
+    margin: 2rem;
+    cursor: pointer;
+}
+
+li:before {
+    content: counter(listNumbering, decimal);
+    display: block;
+    font-family: Oswald, sans-serif;
+    font-size: 11rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--black);
+}
+
+.summary {
+    color: var(--black);
+    border-top: 1px dashed var(--black);
+    border-bottom: 1px dashed var(--black);
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.15rem;
+    padding: .5rem 0;
+    text-align: center;
 }
 
 
 
-.container{
+.arrowlink {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1.8rem;
+}
+
+/* --- end of intro text numbers display--- */
+/*---------------------- results ------------------------*/
+.results {
+    background-color: var(--tertiary);
+    height: 20rem;
+}
+
+.results a {
+    color: var(--secondary);
+    font-weight: 900;
+}
+
+.results-message {
+    width: 75%;
+    margin: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    border-top: 2px dashed var(--black);
+    border-bottom: 2px dashed var(--black);
+    max-width: 1000px;
+
+
+}
+
+
+
+/*-------------------end of results----------------------- */
+.container {
     background-color: var(--secondary);
     width: 100%;
 }
@@ -132,18 +237,18 @@ h4 {
     padding-top: 10rem;
 }
 
-
 .button {
     padding: 1.5rem 3rem;
-    font-size: 1.9rem;
+    font-size: 1.8rem;
     background-color: var(--black);
     ;
     border-radius: .5rem;
     color: white;
     border: 2px solid var(--black);
     ;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     height: auto;
+    width: 17rem;
 }
 
 .button:hover {
@@ -155,34 +260,35 @@ h4 {
     color: var(--black);
     ;
 }
-
+/* styles for radio button flexbox   */
 .item-container {
     display: flex;
     margin: auto;
     justify-content: space-around;
     flex-wrap: wrap;
     flex-direction: row;
-    width: 80%;
+    width: 75%;
     counter-reset: section;
     position: relative;
     background-color: var(--tertiary);
+    max-width: 1000px;
 }
 
 .display {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 25rem;
+    width: 20rem;
     margin: 0rem 1rem;
 }
-
 
 
 .formtext {
     height: 5.5rem;
     font-weight: 900;
 }
-
+/*----end of  styles for radio button flexbox ----------  */
+/* ----------styles for radio buttons--------- */
 .rb-container {
     display: flex;
     flex-direction: column;
@@ -219,7 +325,7 @@ h4 {
 }
 
 .rb-text {
-    font-size: 1.9rem
+    font-size: 1.8rem
 }
 
 .rb .rb-field {
@@ -263,10 +369,19 @@ h4 {
     transition: all .2s cubic-bezier(.45, .05, 0, 1.98);
 }
 
-.footer {
+/* ---------- end of styles for radio buttons--------- */
+
+.footercontainer {
     height: 20rem;
     width: 100%;
-    background-color: var(--tertiary);
+    background-color: var(--black);
+}
+
+.footer{
+    width: 80%;
+    margin: auto;
+    padding: 3rem 0;
+    color: #ffffff;
 }
 
 @media screen and (max-width: 600px) {
@@ -278,224 +393,115 @@ h4 {
 
     .display {
         flex: 1;
-
     }
 }
 
-/* intro text display */
-.content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 9.5rem 0;
 
-}
-
-.contentitems{
-    transition: all .5s;
-    flex: .75;
-}
-
-.open {
-    flex-grow: 2;
-
-}
-.open p{
-
-}
-
-/* @media screen and (max-width: 960px) {
-    .content {
-        grid-template-columns: 2fr 2fr;
-    }
-} */
-
-ol {
-    counter-reset: listNumbering;
-    list-style: none;
-    padding: 0 1rem;
-    margin: auto;
-}
- /* .contentitems > * {
-transition: transform 0.5s;
- } */
-
-
-li {
-    font-size: 1em;
-    counter-increment: listNumbering;
-    width: 18rem;
-    margin: 2rem;
-    cursor: pointer;
-
-}
-
-li:before {
-    content: counter(listNumbering, decimal);
-    display: block;
-    font-family: Oswald, sans-serif;
-    font-size: 11rem;
-    font-weight: 700;
-    text-align: center;
-    color: var(--black);
-}
-
-
-
-.summary {
-    color: var(--black);
-    border-top: 1px dashed var(--black);
-    border-bottom: 1px dashed var(--black);
-    font-family: "Source Sans Pro", sans-serif;
-    font-size: 2rem;
-    font-weight: 300;
-    letter-spacing: 0.15rem;
-    padding: .5rem 0;
-    text-align: center;
-
-}
-
-.fa-arrow-right {
-    font-size: 3rem;
-    color: var(--black);
-    ;
-}
-
-.arrowlink {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 1.9rem;
-}
-
-/* END OF intro text display */
-
-.questionmark {
-
-   background-image: url(images/questionmark.svg);
-   background-size: 38px 38px;
-    padding: 1em;
-    background-repeat: no-repeat;
-
-    width: 3rem;
+/* -----------------tooltip ------------*/
+.tool {
+    position: absolute;
+    top: 67rem;
+    margin-left: -2.3rem;
 }
 
 .tooltip {
     width: 14rem;
     padding: 1rem;
-  background-color: var(--tertiary);
-  color: black;
-  text-align: center;
-  opacity: 0;
-
-  border-radius: .2rem;
-   z-index: 1;
-
+    background-color: var(--tertiary);
+    color: black;
+    text-align: center;
+    opacity: 0;
+    border-radius: .2rem;
+    z-index: 1;
     font: 0.65em Arial, Helvetica, sans-serif;
     display: block;
     position: absolute;
     right: 2rem;
-
-top: -9rem;
-
-}
-.tooltip::after{
-content: "";
-  position: absolute;
-  top: 100%;
-  left: 80%;
-  margin-left: -10px;
-  border-width: 10px;
-  border-style: solid;
-  border-color: var(--tertiary) transparent transparent transparent;
+    top: -9rem;
 }
 
-.formcontainer{
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 80%;
+    margin-left: -10px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: var(--tertiary) transparent transparent transparent;
+}
+.questionmark {
+    background-image: url(images/questionmark.svg);
+    background-size: 38px 38px;
+    padding: 1em;
+    background-repeat: no-repeat;
+    width: 3rem;
+}
+
+
+/* -------------end of tooltip----------- */
+
+
+.formcontainer {
     padding: 4rem;
     margin: auto;
     background-color: white;
-    width: 65rem;
+    width: 70rem;
 }
 
-.tool {
-
-    position: absolute;
-    top: 67.6rem;
-
-margin-left: -2.3rem;
-
-
-}
-
-.container-white{
+.container-white {
     padding: 5rem;
 }
 
 .contact-form-body {
-
     width: 100%;
     height: auto;
     background-color: var(--secondary);
-
 }
-.main-content{
-    padding: 4rem;
 
+.main-content {
+    padding: 4rem;
     margin: auto;
-    width:auto;
+    width: auto;
     background-color: var(--secondary);
 }
+
 .contact-form {
-    width: 55rem;
-
-
-
-
-        background-color: white;
-        padding: 3rem;
-
-
+    width: 60rem;
+    background-color: white;
+    padding: 3rem;
 }
 
 .error {
     display: block;
     align-self: center;
-
     margin-left: 1rem;
-    color: var(--red);
-    font-size: 1.8rem;
-
+    color: red;
+    font-size: 1.4rem;
 }
 
-
 .forminput {
-
     height: 5.5rem;
-
-   display: flex;
-
+    display: flex;
     margin-bottom: 1.5rem;
     width: 100%
 }
 
 .label {
     width: 27rem;
-
     height: 3rem;
     align-self: flex-end;
     display: inline-block;
     font-size: 1.8rem;
 }
 
-.backgroundred{
+.backgroundred {
     background-color: #f9e3df;
 }
 
 /*----------------- Select box dropdown styles -----------  */
 .select-style {
     padding: 0;
-
     border: 1px solid var(--black);
     width: 8rem;
     border-radius: .2rem;
@@ -504,9 +510,7 @@ margin-left: -2.3rem;
     height: 5rem;
     background: #fff url("images/arrow-down-solid.svg") no-repeat 75% 50%;
     background-size: 15px 15px;
-
 }
-
 
 .select-style select {
     padding: .4rem;
@@ -518,25 +522,20 @@ margin-left: -2.3rem;
     background-color: transparent;
     background-image: none;
     -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
-
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .select-style select:focus {
-    border:0px;
-    outline:0px;
-
+    border: 0px;
+    outline: 0px;
 }
 
 /*-----------------end of Select box dropdown styles -----------  */
-
-
-
 input {
     border: 1px solid var(--black);
     height: 5rem;
-    width: 23rem;
+    width: 25rem;
     /* margin: 10px 0 0 0; */
     padding: .4rem;
     font-size: 1.8rem;
@@ -555,49 +554,53 @@ input {
     background-color: #f8ffd4;
 }
 
-
 /* ------------ popup css ---------------- */
 .modal {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        opacity: 0;
-        visibility: hidden;
-        transform: scale(1.1);
-        /*transition for when the form closes */
-        transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
-    }
-    .modal-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: white;
-        padding: 1rem 1.5rem;
-        width: 35rem;
-        height: 15rem;
-        border-radius: 0.1rem;
-        border: 3px solid var(--black);
-    }
-    .close-button {
-        float: right;
-        width: 1.5rem;
-        line-height: 1.5rem;
-        text-align: center;
-        cursor: pointer;
-        border-radius: 0.25rem;
-        background-color: lightgray;
-    }
-    .close-button:hover {
-        background-color: darkgray;
-    }
-    .show-modal {
-        opacity: 1;
-        visibility: visible;
-        transform: scale(1.0);
-        transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
-    }
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    /*transition for when the form closes */
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 1.5rem;
+    width: 35rem;
+    height: 15rem;
+    border-radius: 0.1rem;
+    border: 3px solid var(--black);
+}
+
+.close-button {
+    float: right;
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+}
+
+.close-button:hover {
+    background-color: darkgray;
+}
+
+.show-modal {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1.0);
+    transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+}
+
 /* ------------ end of popup css ---------------- */

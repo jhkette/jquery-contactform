@@ -1,21 +1,18 @@
 window.onload = start;
 
-/* With the placeholder text, we are adding/removing several different pieces of
-text based on the user input/validation. The programme needs to have a clear sequence for it to
-run correctly. First I am calling the 'hints', which needs to be presented on page load, this function
-then calls the validate or clearError functions based on user input. The hint function is then
-recalled or it's input removed. The other form inputs are listend for in load event listeners, which also in
-turn validate or report errors. */
+/* The programme structure of the form validation is exactly the same as for the javascript form. Notes on functions etc
+are therefore less detailed. */
 
+// on window load call these functions
 function start() {
     loadEventListeners();
     firstNameHint();
     secondNameHint();
     healthHint();
     switchToolTip();
-
 }
 
+// load event listeners
 function loadEventListeners() {
     $('#email').blur(validateEmail);
     $('#telephone').blur(validateTelephone);
@@ -31,19 +28,17 @@ function loadEventListeners() {
         telephone = $(this);
         clearError(telephone);
     });
-
     $('#userInfo').submit(processForm);
 }
 
 
-
+// function to validate first name
 function validateFirstName() {
 
     var defaultText = "Enter your name.";
     var valid = true;
     var firstNameField = $('#first-name');
     var firstName = $('#first-name').val();
-
     /* first name contain only letters and is at least two charecters long, case insensitive  */
     var re = new RegExp(/^[a-z]{2,}$/i);
     if (re.test(firstName)) {
@@ -51,59 +46,92 @@ function validateFirstName() {
         removeRedError(firstNameField);
         return valid;
     } else {
-        $('#first-nameError').append('error in the name field');
+        $('#first-nameError').append('The first name contains an error');
         removeNameFocus();
         addRedError(firstNameField);
-
-        return valid = false;
+        valid = false;
+        return valid;
     }
 }
-
+// function to validate last name
 function validateSecondName() {
 
     var defaultText = "Enter your name.";
     var valid = true;
     var secondNameField = $('#second-name');
     var secondName = $('#second-name').val();
-
-    /* first name contain only letters and is at least two charecters long, case insensitive  */
-    var re = new RegExp(/^[a-z-]{2,}$/i);
+    /* last name contain only letters OR contains letters and '-' .  Is at least two charecters long, case insensitive   */
+    var re = new RegExp(/^[a-z][a-z-]+$/i);
     if (re.test(secondName)) {
-        // removeNameFocus();
+
         removeRedError(secondNameField);
         return valid;
     } else {
-        $('#second-nameError').append('error in the name field');
-
+        $('#second-nameError').append('The second name contains an error');
         addRedError(secondNameField);
-
-        return valid = false;
+        valid = false;
+        return valid;
     }
 }
 
+// function to validate email
 function validateEmail() {
 
     var valid = true;
     var emailField = $('#email');
     var email = $('#email').val();
 
-    /* first name contain only letters and is at least two charecters long, case insensitive  */
     var re = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
     if (re.test(email)) {
-        // removeNameFocus();
         removeRedError(emailField);
-
         return valid;
     } else {
-        $('#emailError').append('error in the name field');
-
-        // removeNameFocus();
+        $('#emailError').append('This is not a valid email');
         addRedError(emailField);
+        valid = false;
+        return valid;
+    }
+}
+// function to validate health
+function validateHealth() {
 
-        return valid = false;
+    var valid = true;
+    var healthField = $('#health');
+    var health = $('#health').val();
+    // input starts with zha and then 6 numbers case insensitive
+    var re = new RegExp(/^zha\d{6}$/i);
+    if (re.test(health)) {
+        removeRedError(healthField);
+        return valid;
+    } else {
+        $('#healthError').append('This is not a valid health authority number');
+        addRedError(healthField);
+        valid = false;
+        return valid;
     }
 }
 
+// function to validate telephone
+function validateTelephone() {
+
+    var valid = true;
+    var telephoneField = $('#telephone');
+    var telephone = $('#telephone').val();
+    /* regular expression to match 11 digits. no other chrecters allowed */
+    var re = new RegExp(/^\d{11}$/i);
+    if (re.test(telephone)) {
+        removeRedError(telephoneField);
+        return valid;
+    } else {
+        $('#telephoneError').append('error in the name field');
+
+        addRedError(telephoneField);
+        valid = false;
+        return valid;
+    }
+}
+
+// function to process form and call modal popup if valid - else return error
 function processForm() {
 
     clearAllErrors();
@@ -113,43 +141,18 @@ function processForm() {
     var email = validateEmail();
     var health = validateHealth();
 
-
-
     if ((firstName == true) && (lastName == true) && (email == true) && (health == true))  {
-
-        toggleModal();
+        toggleModal(); //modal is called if all the neccersary inputs are correct
         return false;
     }
-
     else{
         $('#submitError').html('There are errors in the form');
      return false;
     }
 }
 
-function validateHealth() {
-
-    var valid = true;
-    var healthField = $('#health');
-    var health = $('#health').val();
-
-    /* first name contain only letters and is at least two charecters long, case insensitive  */
-    var re = new RegExp(/^zha\d{6}$/i);
-    if (re.test(health)) {
-
-        removeRedError(healthField);
-
-        return valid;
-    } else {
-        $('#healthError').append('error in the name field');
-
-
-        addRedError(healthField);
-
-        return valid = false;
-    }
-}
-
+/* function to show first name hint. this calls validation function on blur. Calls remove name focus
+and clear error  on focus */
 function firstNameHint() {
 
     var defaultText = "Enter your name.";
@@ -158,9 +161,8 @@ function firstNameHint() {
     txtElem.css('color', '#A8A8A8');
     txtElem.css('fontStyle', "italic");
 
-
     txtElem.focus(function() {
-        //the value being operated on
+
         removeNameFocus();
 
         if ($(this).val() == defaultText) {
@@ -183,21 +185,16 @@ function firstNameHint() {
     });
 }
 
-
+//  function to show hint for the last name field
 function secondNameHint() {
 
     var defaultText = "Enter your name.";
     var txtElem = $("#second-name");
-
     txtElem.val(defaultText);
-
-
     txtElem.css('color', '#A8A8A8');
     txtElem.css('fontStyle', "italic");
 
-
     txtElem.focus(function() {
-        //the value being operated on
 
         if ($(this).val() == defaultText) {
 
@@ -220,19 +217,16 @@ function secondNameHint() {
     });
 }
 
+//  function to show hint for health authority field
 function healthHint() {
 
     var defaultText = "Enter your name.";
     var txtElem = $("#health");
     txtElem.val(defaultText);
-
-
     txtElem.css('color', '#A8A8A8');
     txtElem.css('fontStyle', "italic");
 
-
     txtElem.focus(function() {
-        //the value being operated on
 
         if ($(this).val() == defaultText) {
             $(this).val("");
@@ -255,30 +249,6 @@ function healthHint() {
 }
 
 
-
-function validateTelephone() {
-
-    var valid = true;
-    var telephoneField = $('#telephone');
-    var telephone = $('#telephone').val();
-
-    /* first name contain only letters and is at least two charecters long, case insensitive  */
-    var re = new RegExp(/^\d{11}$/i);
-    if (re.test(telephone)) {
-        // removeNameFocus();
-        removeRedError(telephoneField);
-
-        return valid;
-    } else {
-        $('#telephoneError').append('error in the name field');
-
-        // removeNameFocus();
-        addRedError(telephoneField);
-
-        return valid = false;
-    }
-}
-
 /*This function clears each individual error on blur of the particular form field
 The id is passed as an argument to the function */
 function clearError(id) {
@@ -295,10 +265,10 @@ function clearAllErrors(){
 /* This remove the initial 'focus' on the first name field when the form is presented.   */
 function removeNameFocus() {
     var firstNameField = $('#first-name');
-    firstNameField.removeClass('focusgreen');
+    firstNameField.removeClass('focus');
 }
 
-
+// function to show and hide toolip on mouseout/mouseover
 function switchToolTip() {
     $('#qmark').mouseover(function() {
         var toolTip = $('#ttip');
@@ -309,19 +279,17 @@ function switchToolTip() {
         toolTip.css('opacity', '0');
     });
 }
-
+// function to add pale red background. Is called by validation function if there is an error
 function addRedError(field) {
-
     field.addClass('backgroundred');
 }
 
+// function to remove red background. again this is called by validation function - if input is valid
 function removeRedError(field) {
-
     field.removeClass('backgroundred');
 }
 
-
-
+// function to show modal. This is called by the processForm function if validation is complete
 function toggleModal() {
     var modal = $(".modal");
     modal.addClass("show-modal");
@@ -338,7 +306,5 @@ function toggleModal() {
     function removeModal(e){
         var modal = $(".modal");
         modal.removeClass("show-modal");
-
     }
-
 }
