@@ -3,16 +3,19 @@ window.onload = start;
 /* The programme structure of the form validation is exactly the same as for the javascript form. Notes on functions etc
 are therefore less detailed. */
 
-// on window load call these functions
+// on window load call these functions.
 function start() {
-    loadEventListeners();
+    /* On window load these hint function. These need to be loaded first at the hint text needs to be present on window load.
+    The hints then call function based on user behaviour. On focus the hint is cleared, on blur the formfield is validated etc.*/
     firstNameHint();
     secondNameHint();
     healthHint();
+    loadEventListeners();
     switchToolTip();
 }
 
-// load event listeners
+/* The other form inputs are listend for in load event listeners, which also in
+turn validate or report errors. 'submit' is litened for and calls 'processForm' */
 function loadEventListeners() {
     $('#email').blur(validateEmail);
     $('#telephone').blur(validateTelephone);
@@ -89,7 +92,10 @@ function validateEmail() {
     var valid = true;
     var emailField = $('#email');
     var email = $('#email').val();
-
+    /* regular expression: one or more letters or numbers or '_.-', followed by an @ sign. Then the email provider, which is letters,
+    numbers, or selected punctuation. Then a dot. Then a domain name which is letters, may contain a dot. Between 2 and 6 chrecters long.
+    Then end of string.
+    Inspiration from https://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6149 */
     var re = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
     if (re.test(email)) {
         removeRedError(emailField);
@@ -123,8 +129,7 @@ function validateHealth() {
 
 /*Function to validate title. The inital selection is an empty string.
 This way i'm making the user SELECT a title rather than just add the default selection.
- If the value which accords to an empty string
-is selected an error is thrown */
+If the value which accords to an empty string is selected an error is thrown */
 function validateTitle(){
     var valid = true;
     var title = $('#title');
@@ -135,7 +140,6 @@ function validateTitle(){
     } else{
         return valid;
     }
-
 }
 
 // function to validate telephone
@@ -180,7 +184,7 @@ function processForm() {
 }
 
 /* function to show first name hint. this calls validation function on blur. Calls remove name focus
-and clear error  on focus */
+and clear error  on focus. The 2 other hint functions follow the same structure */
 function firstNameHint() {
 
     var defaultText = "Enter your name.";
@@ -191,7 +195,7 @@ function firstNameHint() {
 
     txtElem.focus(function() {
 
-        removeNameFocus();
+        removeNameFocus(); //remove 'focus' - ie background - on focus
 
         if ($(this).val() == defaultText) {
             $(this).val("");
@@ -201,7 +205,7 @@ function firstNameHint() {
         }
 
         textElemId = $(this);
-        clearError(textElemId);
+        clearError(textElemId); // call clearError with textElemId as an argument
     });
     txtElem.blur(function() {
         if ($(this).val() == "") {
@@ -209,11 +213,11 @@ function firstNameHint() {
             $(this).css('color', '#A8A8A8');
             $(this).css('fontStyle', "italic");
         }
-        validateFirstName();
+        validateFirstName(); // call validate first name on blur.
     });
 }
 
-//  function to show hint for the last name field
+// function to show hint for the last name field
 function secondNameHint() {
 
     var defaultText = "Enter your name.";
