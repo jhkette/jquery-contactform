@@ -1,4 +1,4 @@
-window.onload = start;
+$(window).load(start);
 
 /* The programme structure of the form validation is exactly the same as for the javascript form. Notes on functions etc
 are therefore less detailed. */
