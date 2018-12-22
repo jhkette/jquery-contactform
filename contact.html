@@ -20,7 +20,7 @@
             <h2>Diabetes assessment tool</h2>
             <nav class="leftnav">
                 <nav class="contact-nav">
-                    <h2><a href="#">Home</a></h2>
+                    <h2><a href="index.html">Home</a></h2>
                 </nav>
                 <nav class="contact-nav" id="current">
                     <h2><a href="contact.html">Contact</a></h2>
@@ -29,7 +29,6 @@
         </nav>
     </nav>
     <main class="contact-form-body">
-
         <div class="container-white">
             <div class="formcontainer">
                 <h3>Contact us</h3>
@@ -40,63 +39,48 @@
                 </div>
                 <!-- I'm adding novalidate so validation is only done by js. Not by in built html5 validation -->
                 <form id="userInfo" action="post" class="contact-form" novalidate>
-
                     <label class="label" for="first-name">First Name <span class="red">*</span></label>
                     <div class="forminput">
                         <input id="first-name" class="input-text focus" type="text">
-
                         <div id="first-nameError" class="error">&nbsp;</div>
                     </div>
-
                     <label class="label" for="second-name">Last Name <span class="red">*</span></label>
                     <div class="forminput">
                         <input id="second-name" class="input-text">
                         <div id="second-nameError" class="error">&nbsp;</div>
                     </div>
-
-
                     <label class="label" for="title">Title <span class="red">*</span></label>
-                   <div class="forminput">
-                    <div class="select-style">
-                        <select name="title" id="title" class="input-text">
-                            <option value=""> </option>
-                            <option value="Mr">Mr</option>
-                            <option value="Mrs">Mrs</option>
-                            <option value="Ms">Ms</option>
-                            <option value="Miss">Miss</option>
-                            <option value="Master">Master</option>
-                        </select>
-
+                    <div class="forminput">
+                        <div class="select-style">
+                            <select name="title" id="title" class="input-text">
+                                <option value=""> </option>
+                                <option value="Mr">Mr</option>
+                                <option value="Mrs">Mrs</option>
+                                <option value="Ms">Ms</option>
+                                <option value="Miss">Miss</option>
+                                <option value="Master">Master</option>
+                            </select>
+                        </div>
+                        <div id="titleError" class="error titleerror">&nbsp;</div>
                     </div>
-                    <div id="titleError" class="error titleerror">&nbsp;</div>
-                </div>
-
-
                     <label class="label" for="email">E-mail <span class="red">*</span></label>
                     <div class="forminput">
                         <input id="email" class="input-text" type="email">
                         <div id="emailError" class="error">&nbsp;</div>
                     </div>
-
-
                     <label class="label" for="health">Health Authority Number <span class="red">*</span></label>
                     <div class="forminput">
                         <input id="health" class="input-text" type="text">
                         <div id="healthError" class="error">&nbsp;</div>
                     </div>
-
-
                     <label class="label" for="telephone">Telephone number</label>
                     <div class="forminput">
                         <input id="telephone" class="input-text" type="text">
                         <div id="telephoneError" class="error">&nbsp;</div>
                     </div>
-
                     <input type="submit" id="Submit" value="Submit" class="button">
                     <div id="submitError" class="error">&nbsp;</div>
-
                 </form>
-
                 <div class="modal">
                     <div class="modal-content">
                         <span class="close-button">&times;</span>
@@ -111,7 +95,6 @@
 
         </footer>
     </div>
-
-
 </body>
+
 </html>

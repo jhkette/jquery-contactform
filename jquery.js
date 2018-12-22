@@ -30,7 +30,6 @@ function loadEventListeners() {
         clearError(telephone);
     });
 
-
     var title = $('#title');
     title.focus(function() {
         title = $(this);
@@ -63,6 +62,7 @@ function validateFirstName() {
         return valid;
     }
 }
+
 // function to validate last name
 function validateSecondName() {
 
@@ -101,6 +101,7 @@ function validateEmail() {
         return valid;
     }
 }
+
 // function to validate health
 function validateHealth() {
 
@@ -120,7 +121,9 @@ function validateHealth() {
     }
 }
 
-/*Function to validate title. If the value which accords to an empty string
+/*Function to validate title. The inital selection is an empty string.
+This way i'm making the user SELECT a title rather than just add the default selection.
+ If the value which accords to an empty string
 is selected an error is thrown */
 function validateTitle(){
     var valid = true;
@@ -164,7 +167,7 @@ function processForm() {
     var lastName = validateSecondName();
     var email = validateEmail();
     var health = validateHealth();
-    var title = validateTitle()
+    var title = validateTitle();
 
     if ((firstName == true) && (lastName == true) && (email == true) && (title == true) && (health == true))  {
         toggleModal(); //modal is called if all the neccersary inputs are correct
