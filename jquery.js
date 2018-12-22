@@ -204,7 +204,7 @@ function firstNameHint() {
             $(this).css('font-style', 'normal');
         }
 
-        textElemId = $(this);
+        var textElemId = $(this);
         clearError(textElemId); // call clearError with textElemId as an argument
     });
     txtElem.blur(function() {
@@ -236,7 +236,7 @@ function secondNameHint() {
             $(this).css('font-style', 'normal');
         }
 
-        textElemId = $(this);
+        var textElemId = $(this);
         clearError(textElemId);
     });
     txtElem.blur(function() {
@@ -267,7 +267,7 @@ function healthHint() {
             $(this).css('font-style', 'normal');
         }
 
-        textElemId = $(this);
+        var textElemId = $(this);
         clearError(textElemId);
     });
     txtElem.blur(function() {
