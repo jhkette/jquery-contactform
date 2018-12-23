@@ -133,7 +133,7 @@ If the value which accords to an empty string is selected an error is thrown */
 function validateTitle(){
     var valid = true;
     var title = $('#title');
-    if(title.val() == "") {
+    if(title.val() == "select-title") {
         $('#titleError').html('Enter your title');
         valid = false;
         return valid;
