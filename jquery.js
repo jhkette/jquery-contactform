@@ -1,18 +1,20 @@
-$(window).load(start);
+// Joseph Ketterer
+$(document).ready(function() {
 
-/* The programme structure of the form validation is exactly the same as for the javascript form. Notes on functions etc
-are therefore less detailed. */
+    /* The programme structure of the form validation is exactly the same as for the javascript form. Notes on functions etc
+    are therefore less detailed. */
 
-// on window load call these functions.
-function start() {
-    /* On window load these hint function. These need to be loaded first at the hint text needs to be present on window load.
-    The hints then call function based on user behaviour. On focus the hint is cleared, on blur the formfield is validated etc.*/
-    firstNameHint();
-    secondNameHint();
-    healthHint();
-    loadEventListeners();
-    switchToolTip();
-}
+    /* on document.ready call these functions.. These need to be loaded first at the hint text needs to be present on window load.
+    The hints then call function based on user behaviour. On focus the hint is cleared, on blur the formfield
+    is validated etc.*/
+
+        firstNameHint();
+        secondNameHint();
+        healthHint();
+        loadEventListeners();
+        switchToolTip();
+
+});
 
 /* The other form inputs are listend for in load event listeners, which also in
 turn validate or report errors. 'submit' is litened for and calls 'processForm' */
@@ -43,17 +45,18 @@ function loadEventListeners() {
 
 }
 
-
-// function to validate first name
+/* validate first name uses a regular expression to validate the form. The initial focus on the first name
+is removed if valid by calling a function from here or re -added if it still incorrect. There needs to be seperate
+valiadtion functions for each input. we can't just loop through all the inputs as we are testing each input against
+specific regular expressions. Each function also needs to return a value */
 function validateFirstName() {
 
     var defaultText = "Enter your name.";
     var valid = true;
     var firstNameField = $('#first-name');
-    var firstName = $('#first-name').val();
     /* first name contain only letters and is at least two charecters long, case insensitive  */
     var re = new RegExp(/^[a-z]{2,}$/i);
-    if (re.test(firstName)) {
+    if (re.test(firstNameField.val())) {
         removeNameFocus();
         removeRedError(firstNameField);
         return valid;
@@ -72,10 +75,9 @@ function validateSecondName() {
     var defaultText = "Enter your name.";
     var valid = true;
     var secondNameField = $('#second-name');
-    var secondName = $('#second-name').val();
     /* last name contain only letters OR contains letters and '-' .  Is at least two charecters long, case insensitive   */
     var re = new RegExp(/^[a-z][a-z-]+$/i);
-    if (re.test(secondName)) {
+    if (re.test(secondNameField.val())) {
         removeRedError(secondNameField);
         return valid;
     } else {
@@ -91,13 +93,12 @@ function validateEmail() {
 
     var valid = true;
     var emailField = $('#email');
-    var email = $('#email').val();
     /* regular expression: one or more letters or numbers or '_.-', followed by an @ sign. Then the email provider, which is letters,
     numbers, or selected punctuation. Then a dot. Then a domain name which is letters, may contain a dot. Between 2 and 6 chrecters long.
     Then end of string.
     Inspiration from https://code.tutsplus.com/tutorials/8-regular-expressions-you-should-know--net-6149 */
     var re = new RegExp(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/);
-    if (re.test(email)) {
+    if (re.test(emailField.val())) {
         removeRedError(emailField);
         return valid;
     } else {
@@ -113,10 +114,9 @@ function validateHealth() {
 
     var valid = true;
     var healthField = $('#health');
-    var health = $('#health').val();
     // input starts with zha and then 6 numbers case insensitive
     var re = new RegExp(/^zha\d{6}$/i);
-    if (re.test(health)) {
+    if (re.test( healthField.val())) {
         removeRedError(healthField);
         return valid;
     } else {
@@ -130,14 +130,14 @@ function validateHealth() {
 /*Function to validate title. The inital selection is an empty string.
 This way i'm making the user SELECT a title rather than just add the default selection.
 If the value which accords to an empty string is selected an error is thrown */
-function validateTitle(){
+function validateTitle() {
     var valid = true;
     var title = $('#title');
-    if(title.val() == "select-title") {
+    if (title.val() == "select-title") {
         $('#titleError').html('Enter your title');
         valid = false;
         return valid;
-    } else{
+    } else {
         return valid;
     }
 }
@@ -147,15 +147,13 @@ function validateTelephone() {
 
     var valid = true;
     var telephoneField = $('#telephone');
-    var telephone = $('#telephone').val();
     /* regular expression to match 11 digits. no other chrecters allowed */
     var re = new RegExp(/^\d{11}$/i);
-    if (re.test(telephone)) {
+    if (re.test(telephoneField.val())) {
         removeRedError(telephoneField);
         return valid;
     } else {
         $('#telephoneError').append('error in the name field');
-
         addRedError(telephoneField);
         valid = false;
         return valid;
@@ -173,18 +171,17 @@ function processForm() {
     var health = validateHealth();
     var title = validateTitle();
 
-    if ((firstName == true) && (lastName == true) && (email == true) && (title == true) && (health == true))  {
+    if ((firstName == true) && (lastName == true) && (email == true) && (title == true) && (health == true)) {
         toggleModal(); //modal is called if all the neccersary inputs are correct
         return false;
-    }
-    else{
+    } else {
         $('#submitError').html('There are errors in the form');
-     return false;
+        return false;
     }
 }
 
 /* function to show first name hint. this calls validation function on blur. Calls remove name focus
-and clear error  on focus. The 2 other hint functions follow the same structure */
+and clear error  on focus. The 2 other hint functions follow the same structure.  */
 function firstNameHint() {
 
     var defaultText = "Enter your name.";
@@ -290,8 +287,8 @@ function clearError(id) {
 /* I'm using this simple function to clear all errors which get called on submit.
 This also clears the submit error. Its the first thing to get called by the processForm
 function. It's far easier to select all items by class and change them in jquery.  */
-function clearAllErrors(){
-    $( ".error" ).html("&nbsp;");
+function clearAllErrors() {
+    $(".error").html("&nbsp;");
 }
 
 /* This remove the initial 'focus' on the first name field when the form is presented.   */
@@ -331,11 +328,12 @@ function toggleModal() {
     $(window).click(windowOnClick);
 
     function windowOnClick(event) {
-            if (event.target === modal) {
-                removeModal();
-            }
+        if (event.target === modal) {
+            removeModal();
         }
-    function removeModal(e){
+    }
+
+    function removeModal(e) {
         var modal = $(".modal");
         modal.removeClass("show-modal");
     }

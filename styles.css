@@ -1,3 +1,4 @@
+/* Joseph Ketterer */
 :root {
     --secondary: #5ec3b6;
     --tertiary: #e2e2e2;
@@ -51,6 +52,15 @@ h2 {
     text-align: center;
     font-weight: 200;
 }
+.navcontainer a {
+    padding-top: 10px;
+    color: white;
+    font-size: 2.2rem;
+    text-align: center;
+    font-weight: 200;
+    vertical-align: middle;
+
+}
 
 h3 {
     font-family: 'Oswald', 'Helvetica neue', arial, sans-serif;
@@ -79,6 +89,7 @@ h4 {
 
 .leftnav {
     display: flex;
+    text-align: center;
 }
 
 .contact-nav a {
