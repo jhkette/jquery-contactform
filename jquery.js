@@ -7,21 +7,21 @@ $(document).ready(function() {
     /* on document.ready call these functions.. These need to be loaded first at the hint text needs to be present on window load.
     The hints then call function based on user behaviour. On focus the hint is cleared, on blur the formfield
     is validated etc.*/
-    var firstNameRe = new RegExp(/^[A-Za-z]{2,}$/i);
-    var healthRe = new RegExp(/^(ZHA)(\d{6})$/);
-    var telephoneRe = new RegExp(/^\d{11}$/);
-    var emailRe = new RegExp(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/);
-
 
     nameHint();
+    switchToolTip();
 
-    $('.input-text').on('blur', function(){
-        var id = $(this).id;
+    $('.input-text').blur(function(){
+        var field = $(this);
+        var id = $(this).attr('id');
 
-
+        validateField(field, id);
     });
 
-
+    $('.input-text').focus(function(){
+        var id = $(this).attr('id');
+        clearError(id);
+    });
 
 
 
@@ -33,22 +33,47 @@ $(document).ready(function() {
 is removed if valid by calling a function from here or re -added if it still incorrect. There needs to be seperate
 valiadtion functions for each input. we can't just loop through all the inputs as we are testing each input against
 specific regular expressions. Each function also needs to return a value */
-function validateField(id)  {
-
-
-    var defaultText = "Enter your name.";
+function validateField(field, id)  {
+    console.log(id);
+    console.log(field);
+    var re ='';
+    var defaultText = '';
     var valid = true;
-    var firstNameField = $('#first-name');
-    /* first name contain only letters and is at least two charecters long, case insensitive  */
 
-    if (re.test(firstNameField.val())) {
+    // console.log(field);
+    if(id == 'first-name'){
+        re = new RegExp(/^[A-Za-z]{2,}$/i);
+        defaultText = 'not a valid first name';
+    }
+    if(id == 'second-name'){
+        re = new RegExp(/^[A-Za-z]{2,}$/i);
+        defaultText = 'not a valid second name';
+    }
+    if(id == 'email'){
+        re = new RegExp(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/);
+        defaultText = 'not a valid second name';
+    }
+    if(id == 'health'){
+        re = new RegExp(/^(ZHA)(\d{6})$/);
+        defaultText = 'not a valid second name';
+    }
+    if(id == 'telephone'){
+        re = new RegExp(/^\d{11}$/);
+        defaultText = 'not a valid second name';
+    }
+
+
+
+    var val = field.val();
+    console.log(val);
+    if (re.test(val)) {
         removeNameFocus();
-        removeRedError(firstNameField);
+        removeRedError(field);
         return valid;
     } else {
-        $('#first-nameError').append('The first name contains an error');
+        $('#'+ id+ 'Error').append('The first name contains an error');
         removeNameFocus();
-        addRedError(firstNameField);
+        addRedError(field);
         valid = false;
         return valid;
     }
@@ -86,12 +111,15 @@ function nameHint() {
     var hintField = $('.hint');
     var nameText = "Enter your name.";
     var emailText = "Enter your name.";
+    var defaultText;
 
     if(hintField.id == 'first-name'){
         hintField.val = (nameText);
+        defaultText = hintField.val;
     }
     if(hintField.id == 'email'){
         hintField.val = (emailText);
+        defaultText = hintField.val;
     }
     hintField.css('color', '#A8A8A8');
     hintField.css('fontStyle', "italic");
@@ -118,7 +146,7 @@ function nameHint() {
         }
 
         var id =  $(this).id;
-        validateField(id);    
+        validateField(id);
     });
 }
 
@@ -127,7 +155,7 @@ function nameHint() {
 /*This function clears each individual error on blur of the particular form field
 The id is passed as an argument to the function */
 function clearError(id) {
-    $('#' + $(id).attr('id') + 'Error').html("&nbsp;");
+    $('#'+ id+ 'Error').html("&nbsp;");
 }
 
 /* I'm using this simple function to clear all errors which get called on submit.
