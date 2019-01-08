@@ -12,34 +12,18 @@ $(document).ready(function() {
     var telephoneRe = new RegExp(/^\d{11}$/);
     var emailRe = new RegExp(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/);
 
-        firstNameHint();
-        secondNameHint();
-        healthHint();
 
-        switchToolTip();
+    nameHint();
+
+    $('.input-text').on('blur', function(){
+        var id = $(this).id;
 
 
-    $('#email').blur(validateEmail);
-    $('#telephone').blur(validateTelephone);
-    $('#title').blur(validateTitle);
-
-    var email = $('#email');
-    email.focus(function() {
-        email = $(this);
-        clearError(email);
     });
 
-    var telephone = $('#telephone');
-    telephone.focus(function() {
-        telephone = $(this);
-        clearError(telephone);
-    });
 
-    var title = $('#title');
-    title.focus(function() {
-        title = $(this);
-        clearError(title);
-    });
+
+
 
     $('#userInfo').submit(processForm);
 
@@ -49,7 +33,8 @@ $(document).ready(function() {
 is removed if valid by calling a function from here or re -added if it still incorrect. There needs to be seperate
 valiadtion functions for each input. we can't just loop through all the inputs as we are testing each input against
 specific regular expressions. Each function also needs to return a value */
-function validateFirstName (id, re, message)  {
+function validateField(id)  {
+
 
     var defaultText = "Enter your name.";
     var valid = true;
@@ -75,14 +60,16 @@ function validateFirstName (id, re, message)  {
 function processForm() {
 
     clearAllErrors();
+    var firstNameRe = new RegExp(/^[A-Za-z]{2,}$/i);
+    var healthRe = new RegExp(/^(ZHA)(\d{6})$/);
+    var telephoneRe = new RegExp(/^\d{11}$/);
+    var emailRe = new RegExp(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/);
 
-    var firstName = validateFirstName();
-    var lastName = validateSecondName();
-    var email = validateEmail();
-    var health = validateHealth();
-    var title = validateTitle();
 
-    if ((firstName == true) && (lastName == true) && (email == true) && (title == true) && (health == true)) {
+    var firstName = validateField('first-name', firstNameRe, 'not valid');
+
+
+    if (firstName == true) {
         toggleModal(); //modal is called if all the neccersary inputs are correct
         return false;
     } else {
@@ -93,15 +80,23 @@ function processForm() {
 
 /* function to show first name hint. this calls validation function on blur. Calls remove name focus
 and clear error  on focus. The 2 other hint functions follow the same structure.  */
-function firstNameHint() {
+function nameHint() {
+    var firstNameRe = new RegExp(/^[A-Za-z]{2,}$/i);
+    var emailRe = new RegExp(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/);
+    var hintField = $('.hint');
+    var nameText = "Enter your name.";
+    var emailText = "Enter your name.";
 
-    var defaultText = "Enter your name.";
-    var txtElem = $("#first-name");
-    txtElem.val(defaultText);
-    txtElem.css('color', '#A8A8A8');
-    txtElem.css('fontStyle', "italic");
+    if(hintField.id == 'first-name'){
+        hintField.val = (nameText);
+    }
+    if(hintField.id == 'email'){
+        hintField.val = (emailText);
+    }
+    hintField.css('color', '#A8A8A8');
+    hintField.css('fontStyle', "italic");
 
-    txtElem.focus(function() {
+    hintField.focus(function() {
 
         removeNameFocus(); //remove 'focus' - ie background - on focus
 
@@ -115,13 +110,15 @@ function firstNameHint() {
         var textElemId = $(this);
         clearError(textElemId); // call clearError with textElemId as an argument
     });
-    txtElem.blur(function() {
+    hintField.blur(function() {
         if ($(this).val() == "") {
             $(this).val(defaultText);
             $(this).css('color', '#A8A8A8');
             $(this).css('fontStyle', "italic");
         }
-        validateFirstName(); // call validate first name on blur.
+
+        var id =  $(this).id;
+        validateField(id);    
     });
 }
 
