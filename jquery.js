@@ -1,6 +1,7 @@
 // Joseph Ketterer / Javascript / Part 2
 
-/* I am using the jquery doc  */
+/* I am using the jquery document.ready to load all the function and assign all the variables that are needed
+for the programme to run on page load  */
 $(document).ready(function() {
 
     var firstName = $('#first-name');
@@ -11,15 +12,15 @@ $(document).ready(function() {
     switchToolTip();
 
     $('.input-text').bind({
-    'blur':function() {
-        var field = $(this);
-        var id = $(this).attr('id');
-        validateField(field, id);
-    },
-    'focus':function() {
-        var id = $(this).attr('id');
-        clearError(id);
-    },
+        'blur': function() {
+            var field = $(this);
+            var id = $(this).attr('id');
+            validateField(field, id);
+        },
+        'focus': function() {
+            var id = $(this).attr('id');
+            clearError(id);
+        },
     });
     $('#userInfo').submit(function(event) {
         processForm();
@@ -27,7 +28,10 @@ $(document).ready(function() {
     });
 });
 
-
+/*The validate field function takes the form field DOM element and its id as parameters. I'm adding
+the field as a parameter to make it easy to remove/add red background [removeRedError(field)] which I present /remove to the user if there
+is/is not an error. The id gets used to assign the correct regular expression to the variable Re.
+ */
 function validateField(field, id) {
     var re = '';
     var defaultText = '';
@@ -54,9 +58,8 @@ function validateField(field, id) {
         re = new RegExp(/^\d{11}$/);
         defaultText = 'This is not a valid telephone number';
     }
-
     var val = field.val();
-    console.log(val);
+
     if (re.test(val)) {
         removeNameFocus();
         removeRedError(field);
@@ -79,14 +82,22 @@ function processForm() {
     $('.input-text').each(function(element) {
         var field = $(this);
         var id = $(this).attr('id');
-        if ((id !== 'telephone') && (field.val() !== '')) {
-            validateField(field, id);
+        if(id !== 'telephone'){
+        if (validateField(field, id) == false) {
+            valid = false;
         }
-        if (validateField == false) {
-            var valid = false;
-        }
+    }
     });
-
+    if ($('#telephone').val() !== "") {
+        if(validateField($('.telephone'), 'telephone') == false){
+        valid = false;
+        }
+    }
+    if (valid == true) {
+        toggleModal();
+    } else {
+        $('.submit').html('There are errors in the form');
+    }
 }
 
 /* function to show first name hint. this calls validation function on blur. Calls remove name focus
@@ -97,8 +108,9 @@ function nameHint(field, message) {
     field.css('fontStyle', "italic");
 
     field.focus(function() {
-
+        if($(this).attr('id') == 'first-name'){
         removeNameFocus(); //remove 'focus' - ie background - on focus
+    }
 
         if ($(this).val() == message) {
             $(this).val("");
@@ -107,8 +119,6 @@ function nameHint(field, message) {
             $(this).css('font-style', 'normal');
         }
 
-
-        // clearError(field.attr('id')); // call clearError with textElemId as an argument
     });
     field.blur(function() {
         if ($(this).val() == "") {
@@ -142,13 +152,15 @@ function removeNameFocus() {
 
 // function to show and hide toolip on mouseout/mouseover
 function switchToolTip() {
-    $('#qmark').mouseover(function() {
-        var toolTip = $('#ttip');
-        toolTip.css('opacity', '1');
-    });
-    $('#qmark').mouseout(function() {
-        var toolTip = $('#ttip');
-        toolTip.css('opacity', '0');
+    $('#qmark').bind({
+        'mouseover': function() {
+            var toolTip = $('#ttip');
+            toolTip.css('opacity', '1');
+        },
+        'mouseout': function() {
+            var toolTip = $('#ttip');
+            toolTip.css('opacity', '0');
+        },
     });
 }
 // function to add pale red background. Is called by validation function if there is an error
