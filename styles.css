@@ -507,7 +507,7 @@ li:before {
 }
 
 .backgroundred {
-    background-color: #f9e3df;
+    background-color: #f9e3df !important;
 }
 
 /*----------------- Select box dropdown styles -----------  */

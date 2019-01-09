@@ -19,6 +19,8 @@ $(document).ready(function() {
         },
         'focus': function() {
             var id = $(this).attr('id');
+            var field = $(this);
+            removeRedError(field);
             clearError(id);
         },
     });
@@ -60,11 +62,11 @@ function validateField(field, id) {
 
     if (re.test(val)) {
         removeNameFocus();
-        removeRedError(field);
+
         return valid;
     } else {
         $('#' + id + 'Error').append(defaultText);
-        removeNameFocus();
+
         addRedError(field);
         valid = false;
         return valid;
@@ -91,6 +93,10 @@ function processForm() {
         valid = false;
         }
     }
+    if ($('#telephone').val() == "") {
+        removeRedError($('#telephone'));
+        }
+
     if (valid == true) {
         toggleModal();
     } else {
