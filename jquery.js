@@ -1,68 +1,59 @@
-// Joseph Ketterer
+// Joseph Ketterer / Javascript / Part 2
+
+/* I am using the jquery doc  */
 $(document).ready(function() {
 
-    /* The programme structure of the form validation is exactly the same as for the javascript form. Notes on functions etc
-    are therefore less detailed. */
+    var firstName = $('#first-name');
+    var email = $('#email');
 
-    /* on document.ready call these functions.. These need to be loaded first at the hint text needs to be present on window load.
-    The hints then call function based on user behaviour. On focus the hint is cleared, on blur the formfield
-    is validated etc.*/
-
-    nameHint();
+    nameHint(firstName, 'Enter your name');
+    nameHint(email, 'Enter your email');
     switchToolTip();
 
-    $('.input-text').blur(function(){
+    $('.input-text').bind({
+    'blur':function() {
         var field = $(this);
         var id = $(this).attr('id');
-
         validateField(field, id);
-    });
-
-    $('.input-text').focus(function(){
+    },
+    'focus':function() {
         var id = $(this).attr('id');
         clearError(id);
+    },
     });
-
-
-
-    $('#userInfo').submit(processForm);
-
+    $('#userInfo').submit(function(event) {
+        processForm();
+        event.preventDefault();
+    });
 });
 
-/* validate first name uses a regular expression to validate the form. The initial focus on the first name
-is removed if valid by calling a function from here or re -added if it still incorrect. There needs to be seperate
-valiadtion functions for each input. we can't just loop through all the inputs as we are testing each input against
-specific regular expressions. Each function also needs to return a value */
-function validateField(field, id)  {
-    console.log(id);
-    console.log(field);
-    var re ='';
+
+function validateField(field, id) {
+    var re = '';
     var defaultText = '';
     var valid = true;
 
     // console.log(field);
-    if(id == 'first-name'){
+    if (id == 'first-name') {
         re = new RegExp(/^[A-Za-z]{2,}$/i);
-        defaultText = 'not a valid first name';
+        defaultText = 'This is not a valid first name';
     }
-    if(id == 'second-name'){
-        re = new RegExp(/^[A-Za-z]{2,}$/i);
-        defaultText = 'not a valid second name';
+    if (id == 'second-name') {
+        re = new RegExp(/^[a-z][a-z-]+$/i);
+        defaultText = 'This is not a valid second name';
     }
-    if(id == 'email'){
+    if (id == 'email') {
         re = new RegExp(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/);
-        defaultText = 'not a valid second name';
+        defaultText = 'This is not a valid email';
     }
-    if(id == 'health'){
+    if (id == 'health') {
         re = new RegExp(/^(ZHA)(\d{6})$/);
-        defaultText = 'not a valid second name';
+        defaultText = 'This is not a valid ZHA number';
     }
-    if(id == 'telephone'){
+    if (id == 'telephone') {
         re = new RegExp(/^\d{11}$/);
-        defaultText = 'not a valid second name';
+        defaultText = 'This is not a valid telephone number';
     }
-
-
 
     var val = field.val();
     console.log(val);
@@ -71,7 +62,7 @@ function validateField(field, id)  {
         removeRedError(field);
         return valid;
     } else {
-        $('#'+ id+ 'Error').append('The first name contains an error');
+        $('#' + id + 'Error').append(defaultText);
         removeNameFocus();
         addRedError(field);
         valid = false;
@@ -80,73 +71,51 @@ function validateField(field, id)  {
 }
 
 
-
 // function to process form and call modal popup if valid - else return error
 function processForm() {
-
+    event.preventDefault();
     clearAllErrors();
-    var firstNameRe = new RegExp(/^[A-Za-z]{2,}$/i);
-    var healthRe = new RegExp(/^(ZHA)(\d{6})$/);
-    var telephoneRe = new RegExp(/^\d{11}$/);
-    var emailRe = new RegExp(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/);
+    var valid = true;
+    $('.input-text').each(function(element) {
+        var field = $(this);
+        var id = $(this).attr('id');
+        if ((id !== 'telephone') && (field.val() !== '')) {
+            validateField(field, id);
+        }
+        if (validateField == false) {
+            var valid = false;
+        }
+    });
 
-
-    var firstName = validateField('first-name', firstNameRe, 'not valid');
-
-
-    if (firstName == true) {
-        toggleModal(); //modal is called if all the neccersary inputs are correct
-        return false;
-    } else {
-        $('#submitError').html('There are errors in the form');
-        return false;
-    }
 }
 
 /* function to show first name hint. this calls validation function on blur. Calls remove name focus
 and clear error  on focus. The 2 other hint functions follow the same structure.  */
-function nameHint() {
-    var firstNameRe = new RegExp(/^[A-Za-z]{2,}$/i);
-    var emailRe = new RegExp(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/);
-    var hintField = $('.hint');
-    var nameText = "Enter your name.";
-    var emailText = "Enter your name.";
-    var defaultText;
+function nameHint(field, message) {
+    field.val(message);
+    field.css('color', '#A8A8A8');
+    field.css('fontStyle', "italic");
 
-    if(hintField.id == 'first-name'){
-        hintField.val = (nameText);
-        defaultText = hintField.val;
-    }
-    if(hintField.id == 'email'){
-        hintField.val = (emailText);
-        defaultText = hintField.val;
-    }
-    hintField.css('color', '#A8A8A8');
-    hintField.css('fontStyle', "italic");
-
-    hintField.focus(function() {
+    field.focus(function() {
 
         removeNameFocus(); //remove 'focus' - ie background - on focus
 
-        if ($(this).val() == defaultText) {
+        if ($(this).val() == message) {
             $(this).val("");
             $(this).val("");
             $(this).css('color', '#000000');
             $(this).css('font-style', 'normal');
         }
 
-        var textElemId = $(this);
-        clearError(textElemId); // call clearError with textElemId as an argument
+
+        // clearError(field.attr('id')); // call clearError with textElemId as an argument
     });
-    hintField.blur(function() {
+    field.blur(function() {
         if ($(this).val() == "") {
-            $(this).val(defaultText);
+            $(this).val(message);
             $(this).css('color', '#A8A8A8');
             $(this).css('fontStyle', "italic");
         }
-
-        var id =  $(this).id;
-        validateField(id);
     });
 }
 
@@ -155,7 +124,7 @@ function nameHint() {
 /*This function clears each individual error on blur of the particular form field
 The id is passed as an argument to the function */
 function clearError(id) {
-    $('#'+ id+ 'Error').html("&nbsp;");
+    $('#' + id + 'Error').html("&nbsp;");
 }
 
 /* I'm using this simple function to clear all errors which get called on submit.
@@ -193,22 +162,3 @@ function removeRedError(field) {
 }
 
 // function to show modal. This is called by the processForm function if validation is complete
-function toggleModal() {
-    var modal = $(".modal");
-    modal.addClass("show-modal");
-    var closeButton = $(".close-button");
-
-    closeButton.click(removeModal);
-    $(window).click(windowOnClick);
-
-    function windowOnClick(event) {
-        if (event.target === modal) {
-            removeModal();
-        }
-    }
-
-    function removeModal(e) {
-        var modal = $(".modal");
-        modal.removeClass("show-modal");
-    }
-}
