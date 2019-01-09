@@ -418,7 +418,7 @@ li:before {
 .tooltip {
     width: 14rem;
     padding: 1rem;
-    background-color: var(--tertiary);
+    background-color: var(--secondary);
     color: black;
     text-align: center;
     opacity: 0;
@@ -439,7 +439,7 @@ li:before {
     margin-left: -10px;
     border-width: 10px;
     border-style: solid;
-    border-color: var(--tertiary) transparent transparent transparent;
+    border-color: var(--secondary) transparent transparent transparent;
 }
 .questionmark {
     background-image: url(images/questionmark.svg);
@@ -467,7 +467,7 @@ li:before {
 .contact-form-body {
     width: 100%;
     height: auto;
-    background-color: var(--secondary);
+    background-color: var(--tertiary);
 }
 
 .main-content {

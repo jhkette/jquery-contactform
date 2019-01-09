@@ -24,7 +24,6 @@ $(document).ready(function() {
     });
     $('#userInfo').submit(function(event) {
         processForm();
-        event.preventDefault();
     });
 });
 
@@ -37,7 +36,6 @@ function validateField(field, id) {
     var defaultText = '';
     var valid = true;
 
-    // console.log(field);
     if (id == 'first-name') {
         re = new RegExp(/^[A-Za-z]{2,}$/i);
         defaultText = 'This is not a valid first name';
@@ -83,10 +81,10 @@ function processForm() {
         var field = $(this);
         var id = $(this).attr('id');
         if(id !== 'telephone'){
-        if (validateField(field, id) == false) {
-            valid = false;
+            if (validateField(field, id) == false) {
+                valid = false;
+            }
         }
-    }
     });
     if ($('#telephone').val() !== "") {
         if(validateField($('.telephone'), 'telephone') == false){
@@ -172,5 +170,3 @@ function addRedError(field) {
 function removeRedError(field) {
     field.removeClass('backgroundred');
 }
-
-// function to show modal. This is called by the processForm function if validation is complete
