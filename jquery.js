@@ -6,12 +6,11 @@ $(document).ready(function() {
 
     var firstName = $('#first-name');
     var email = $('#email');
-
     nameHint(firstName, 'Enter your name');
     nameHint(email, 'Enter your email');
     switchToolTip();
-
-    $('.input-text').bind({
+    /*The on function here allows me to attach two different user events to each element in 'input-text' */
+    $('.input-text').on({
         'blur': function() {
             var field = $(this);
             var id = $(this).attr('id');
@@ -29,10 +28,8 @@ $(document).ready(function() {
     });
 });
 
-/*The validate field function takes the form field DOM element and its id as parameters. I'm adding
-the field as a parameter to make it easy to remove/add red background [removeRedError(field)] which I present /remove to the user if there
-is/is not an error. The id gets used to assign the correct regular expression to the variable Re.
- */
+/*The validate field function takes the form field DOM element and its id as parameters. I'm using a switch case statement to assign a regular expression value to
+var re. I'm then testing the form field value against the regular expression. The title is dealt with seperately as it can only be one of 5 values. */
 function validateField(field, id) {
     var re = '';
     var defaultText = '';
@@ -48,12 +45,13 @@ function validateField(field, id) {
     } else {
         switch (true) {
             case (id == 'first-name'):
+            removeNameFocus(); // remove initial focus on first name as the user has entered something in this field
             re = new RegExp(/^[A-Za-z]{2,}$/i);
             defaultText = 'This is not a valid first name';
             break;
 
             case (id == 'second-name'):
-            re = new RegExp(/^[a-z][a-z-]+$/i);
+            re = new RegExp(/^[a-z][a-z-]{1,}$/i);
             defaultText = 'This is not a valid second name';
             break;
 
@@ -72,14 +70,10 @@ function validateField(field, id) {
             defaultText = 'This is not a valid telephone number';
             break;
         }
-
         if (re.test(field.val())) {
-            removeNameFocus();
-
             return valid;
         } else {
             $('#' + id + 'Error').append(defaultText);
-
             addRedError(field);
             valid = false;
             return valid;
@@ -151,9 +145,7 @@ function clearError(id) {
     $('#' + id + 'Error').html("&nbsp;");
 }
 
-/* I'm using this simple function to clear all errors which get called on submit.
-This also clears the submit error. Its the first thing to get called by the processForm
-function. It's far easier to select all items by class and change them in jquery.  */
+/* I'm using this simple function to clear all errors which get called on submit. This stops multiple errors appearing by the same field*/
 function clearAllErrors() {
     $(".error").html("&nbsp;");
 }
@@ -164,9 +156,10 @@ function removeNameFocus() {
     firstNameField.removeClass('focus');
 }
 
-// function to show and hide toolip on mouseout/mouseover
+/* function to show and hide tooltip on mouseout/mouseover. I'm using the 'on' function here, this allows me to attach the qmark element to
+two different user events,  */
 function switchToolTip() {
-    $('#qmark').bind({
+    $('#qmark').on({
         'mouseover': function() {
             var toolTip = $('#ttip');
             toolTip.css('opacity', '1');
