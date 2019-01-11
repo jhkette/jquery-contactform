@@ -37,39 +37,53 @@ function validateField(field, id) {
     var re = '';
     var defaultText = '';
     var valid = true;
-
-    if (id == 'first-name') {
-        re = new RegExp(/^[A-Za-z]{2,}$/i);
-        defaultText = 'This is not a valid first name';
-    }
-    if (id == 'second-name') {
-        re = new RegExp(/^[a-z][a-z-]+$/i);
-        defaultText = 'This is not a valid second name';
-    }
-    if (id == 'email') {
-        re = new RegExp(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/);
-        defaultText = 'This is not a valid email';
-    }
-    if (id == 'health') {
-        re = new RegExp(/^(ZHA)(\d{6})$/);
-        defaultText = 'This is not a valid ZHA number';
-    }
-    if (id == 'telephone') {
-        re = new RegExp(/^\d{11}$/);
-        defaultText = 'This is not a valid telephone number';
-    }
-    var val = field.val();
-
-    if (re.test(val)) {
-        removeNameFocus();
-
-        return valid;
+    if (id == 'title') {
+        if ((field.val() == 'Mr') || (field.val() == 'Mrs') || (field.val() == 'Miss') || (field.val() == 'Master') || (field.val() == 'Ms')) {
+            return valid;
+        } else {
+            $('#' + id + 'Error').html('Please select a title');
+            valid = false;
+            return valid;
+        }
     } else {
-        $('#' + id + 'Error').append(defaultText);
+        switch (true) {
+            case (id == 'first-name'):
+            re = new RegExp(/^[A-Za-z]{2,}$/i);
+            defaultText = 'This is not a valid first name';
+            break;
 
-        addRedError(field);
-        valid = false;
-        return valid;
+            case (id == 'second-name'):
+            re = new RegExp(/^[a-z][a-z-]+$/i);
+            defaultText = 'This is not a valid second name';
+            break;
+
+            case (id == 'email'):
+            re = new RegExp(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/);
+            defaultText = 'This is not a valid email';
+            break;
+
+            case (id == 'health'):
+            re = new RegExp(/^(ZHA)(\d{6})$/);
+            defaultText = 'This is not a valid ZHA number';
+            break;
+
+            case (id == 'telephone'):
+            re = new RegExp(/^\d{11}$/);
+            defaultText = 'This is not a valid telephone number';
+            break;
+        }
+
+        if (re.test(field.val())) {
+            removeNameFocus();
+
+            return valid;
+        } else {
+            $('#' + id + 'Error').append(defaultText);
+
+            addRedError(field);
+            valid = false;
+            return valid;
+        }
     }
 }
 
@@ -82,25 +96,25 @@ function processForm() {
     $('.input-text').each(function(element) {
         var field = $(this);
         var id = $(this).attr('id');
-        if(id !== 'telephone'){
+        if (id !== 'telephone') {
             if (validateField(field, id) == false) {
                 valid = false;
             }
         }
     });
     if ($('#telephone').val() !== "") {
-        if(validateField($('.telephone'), 'telephone') == false){
-        valid = false;
+        if (validateField($('.telephone'), 'telephone') == false) {
+            valid = false;
         }
     }
     if ($('#telephone').val() == "") {
         removeRedError($('#telephone'));
-        }
+    }
 
     if (valid == true) {
         toggleModal();
     } else {
-        $('.submit').html('There are errors in the form');
+        $('#submitError').html('There are errors in the form');
     }
 }
 
@@ -112,17 +126,15 @@ function nameHint(field, message) {
     field.css('fontStyle', "italic");
 
     field.focus(function() {
-        if($(this).attr('id') == 'first-name'){
-        removeNameFocus(); //remove 'focus' - ie background - on focus
-    }
-
+        if ($(this).attr('id') == 'first-name') {
+            removeNameFocus(); //remove 'focus' - ie background - on focus
+        }
         if ($(this).val() == message) {
             $(this).val("");
             $(this).val("");
             $(this).css('color', '#000000');
             $(this).css('font-style', 'normal');
         }
-
     });
     field.blur(function() {
         if ($(this).val() == "") {
@@ -132,8 +144,6 @@ function nameHint(field, message) {
         }
     });
 }
-
-
 
 /*This function clears each individual error on blur of the particular form field
 The id is passed as an argument to the function */
