@@ -109,17 +109,6 @@ function processForm() {
             }
         }
     });
-    if ($('#telephone').val() !== "") {
-        if (validateField($('.telephone'), 'telephone') == false) {
-            valid = false;
-        }
-    }
-    /*If the telephone field is actually empty when the form is submitted  - i'm not validating it - and i'm removing the error*/
-    if ($('#telephone').val() == "") {
-        clearError(telephone);
-        removeRedError($('#telephone'));
-    }
-
     if (valid == true) {
         toggleModal();
     } else {
