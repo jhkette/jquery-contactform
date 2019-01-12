@@ -1,3 +1,5 @@
+/*This code simply creates the popup - it is not strictly part of the requirements  */
+
 function toggleModal() {
     var modal = $(".modal");
     modal.addClass("show-modal");
