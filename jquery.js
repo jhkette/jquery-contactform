@@ -45,38 +45,51 @@ function validateField(field, id) {
     } else {
         switch (true) {
             case (id == 'first-name'):
-            removeNameFocus(); // remove initial focus on first name as the user has entered something in this field
-            re = new RegExp(/^[A-Za-z]{2,}$/i);
-            defaultText = 'This is not a valid first name';
-            break;
+                removeNameFocus(); // remove initial focus on first name as the user has entered something in this field
+                re = new RegExp(/^[A-Za-z]{2,}$/i);
+                defaultText = 'This is not a valid first name';
+                break;
 
             case (id == 'second-name'):
-            re = new RegExp(/^[a-z][a-z-]{1,}$/i);
-            defaultText = 'This is not a valid second name';
-            break;
+                re = new RegExp(/^[a-z][a-z-]{1,}$/i);
+                defaultText = 'This is not a valid second name';
+                break;
 
             case (id == 'email'):
-            re = new RegExp(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/);
-            defaultText = 'This is not a valid email';
-            break;
+                re = new RegExp(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/);
+                defaultText = 'This is not a valid email';
+                break;
 
             case (id == 'health'):
-            re = new RegExp(/^(ZHA)(\d{6})$/);
-            defaultText = 'This is not a valid ZHA number';
-            break;
+                re = new RegExp(/^(ZHA)(\d{6})$/);
+                defaultText = 'This is not a valid ZHA number';
+                break;
 
             case (id == 'telephone'):
-            re = new RegExp(/^\d{11}$/);
-            defaultText = 'This is not a valid telephone number';
-            break;
+                re = new RegExp(/^\d{11}$/);
+                defaultText = 'This is not a valid telephone number';
+                break;
         }
-        if (re.test(field.val())) {
-            return valid;
+        if (id == 'telephone') {
+            if (field.val() !== '') {
+                if (re.test(field.val())) {
+                    return valid;
+                } else {
+                    $('#' + id + 'Error').append(defaultText);
+                    addRedError(field);
+                    valid = false;
+                    return valid;
+                }
+            }
         } else {
-            $('#' + id + 'Error').append(defaultText);
-            addRedError(field);
-            valid = false;
-            return valid;
+            if (re.test(field.val())) {
+                return valid;
+            } else {
+                $('#' + id + 'Error').append(defaultText);
+                addRedError(field);
+                valid = false;
+                return valid;
+            }
         }
     }
 }
@@ -101,7 +114,9 @@ function processForm() {
             valid = false;
         }
     }
+    /*If the telephone field is actually empty when the form is submitted  - i'm not validating it - and i'm removing the error*/
     if ($('#telephone').val() == "") {
+        clearError(telephone);
         removeRedError($('#telephone'));
     }
 
