@@ -70,6 +70,8 @@ function validateField(field, id) {
                 defaultText = 'This is not a valid telephone number';
                 break;
         }
+        /* I'm only validating the telephone field if there is an entry. If a user has focused on field but left it empty,  I am simply ignoring it, it is considered de facto valid.
+        This is because it is not mandatory. However, if there is an entry and it is incorrect an incorrect an error will show.  */
         if (id == 'telephone') {
             if (field.val() !== '') {
                 if (re.test(field.val())) {
@@ -95,7 +97,8 @@ function validateField(field, id) {
 }
 
 
-// function to process form and call modal popup if valid - else return error
+/* function to process form and call modal popup if valid - else return error. It loops through all fields and calls validateField for each form field.
+If one returns one returns valid == false, the form does not get submitted. */
 function processForm() {
     event.preventDefault();
     clearAllErrors();
@@ -116,17 +119,13 @@ function processForm() {
     }
 }
 
-/* function to show first name hint. this calls validation function on blur. Calls remove name focus
-and clear error  on focus. The 2 other hint functions follow the same structure.  */
+/* function to show first name hint. It removes hint on focus and re-add hint on blur if field is left empty*/
 function nameHint(field, message) {
     field.val(message);
     field.css('color', '#A8A8A8');
     field.css('fontStyle', "italic");
 
     field.focus(function() {
-        if ($(this).attr('id') == 'first-name') {
-            removeNameFocus(); //remove 'focus' - ie background - on focus
-        }
         if ($(this).val() == message) {
             $(this).val("");
             $(this).val("");
@@ -143,8 +142,7 @@ function nameHint(field, message) {
     });
 }
 
-/*This function clears each individual error on blur of the particular form field
-The id is passed as an argument to the function */
+/*This function clears each individual error on blur of the particular form field. The id is passed as an argument to the function */
 function clearError(id) {
     $('#' + id + 'Error').html("&nbsp;");
 }
@@ -160,8 +158,7 @@ function removeNameFocus() {
     firstNameField.removeClass('focus');
 }
 
-/* function to show and hide tooltip on mouseout/mouseover. I'm using the 'on' function here, this allows me to attach the qmark element to
-two different user events,  */
+/* function to show and hide tooltip on mouseout/mouseover. I'm using the 'on' function here, this allows me to attach the qmark element to two different user events,  */
 function switchToolTip() {
     $('#qmark').on({
         'mouseover': function() {
