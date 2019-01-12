@@ -1,8 +1,8 @@
 /* Joseph Ketterer */
 :root {
-    --secondary: #5ec3b6;
+    --secondary: #8FBC8F;
     --tertiary: #e2e2e2;
-    --black: #212020;
+    --black: #161515;
     --red: #fa8072;
 }
 
@@ -36,31 +36,28 @@ p {
     font-size: 1.8rem
 }
 
-h1 {
+/* h1 {
     color: var(--tertiary);
     font-size: 9rem;
     font-family: 'Oswald';
     position: absolute;
     top: 18rem;
     right: 50rem;
-}
+} */
 
-h2 {
-    padding-top: 10px;
+h1 {
+
     color: white;
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     text-align: center;
     font-weight: 200;
+    width: 17rem;
+    height: auto;
+    text-align: left;
+    line-height: 2rem;
+    align-self: center;
 }
-.navcontainer a {
-    padding-top: 10px;
-    color: white;
-    font-size: 2.2rem;
-    text-align: center;
-    font-weight: 200;
-    vertical-align: middle;
 
-}
 
 h3 {
     font-family: 'Oswald', 'Helvetica neue', arial, sans-serif;
@@ -74,50 +71,84 @@ h4 {
     font-size: 3rem
 }
 
+
+
 .row {
     width: 75%;
     margin: auto;
     padding: 1.8rem;
-    max-width: 1000px;
+    max-width: 1400px;
+}
+
+.row-numbers{
+    width: 75%;
+    margin: auto;
+    padding: 0rem;
+    max-width: 1400px;
+
 }
 
 /*---------------- Main navigation ------------- */
-.contact-nav {
-    background-color: var(--secondary);
-    width: 11rem;
-}
-
-.leftnav {
-    display: flex;
-    text-align: center;
-}
-
-.contact-nav a {
-    text-decoration: none;
-    color: var(--black);
-}
-
-.contact-nav:hover {
-    background-color: var(--tertiary);
-}
-
-#current {
-    background-color: var(--tertiary);
+.main-nav {
+    background-color: var(--black);
+    width: 100%;
 }
 
 .navcontainer {
     margin: auto;
-    width: 75%;
+    width: 90%;
     display: flex;
-    justify-content: space-between;
-    height: 4.5rem;
-    max-width: 1000px;
+    justify-content: flex-start;
+    min-height: 7.8rem;
+    max-width: 1400px;
+
 
 }
 
-.main-nav {
-    background-color: var(--black);
-    width: 100%;
+
+.leftnav {
+    display: flex;
+    text-align: center;
+    align-self: center;
+}
+
+.leftnav li:first-child{
+    margin-left: 4rem;
+
+}
+
+.leftnav li{
+    list-style: none;
+    display: inline-block;
+    margin: 0;
+    margin-left: 2rem;
+
+
+
+}
+.leftnav li a{
+font-size: 1.9rem;
+text-decoration: none;
+color: white;
+}
+.contact-nav:hover {
+
+}
+
+#current {
+border-bottom: 2px solid white;
+}
+
+
+.icon{
+    background-image: url(images/search1.svg);
+    background-size: 25px 25px;
+    margin-top: 2.7rem;
+    background-repeat: no-repeat;
+    width: 3rem;
+    margin-left: auto;
+
+
 }
 
 /*---------------- End of Main navigation ---------- */
@@ -126,8 +157,8 @@ h4 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    height: 70rem;
-    padding-top: 5rem;
+    min-height: 70rem;
+
     align-self: center;
 }
 
@@ -162,7 +193,7 @@ h4 {
 }
 
 
-ol {
+.content {
     counter-reset: listNumbering;
     list-style: none;
     padding: 0 1rem;
@@ -170,7 +201,7 @@ ol {
 }
 
 
-li {
+.contentitems {
     font-size: 1em;
     counter-increment: listNumbering;
     width: 18rem;
@@ -178,7 +209,7 @@ li {
     cursor: pointer;
 }
 
-li:before {
+.content li:before {
     content: counter(listNumbering, decimal);
     display: block;
     font-family: Oswald, sans-serif;
@@ -186,6 +217,7 @@ li:before {
     font-weight: 700;
     text-align: center;
     color: var(--black);
+    padding-top: 7rem;
 }
 
 .summary {
@@ -210,6 +242,18 @@ li:before {
     height: 1.8rem;
 }
 
+#home-container{
+    position: relative;
+}
+.circle {
+    border-radius:50%;
+    position: absolute;
+    z-index: 10;
+    opacity: .15;
+    background-color: rgb(6, 122, 18);
+
+}
+
 /* --- end of intro text numbers display--- */
 /*---------------------- results ------------------------*/
 .results {
@@ -218,7 +262,7 @@ li:before {
 }
 
 .results a {
-    color: var(--secondary);
+    color: var(--black);
     font-weight: 900;
 }
 
@@ -230,7 +274,7 @@ li:before {
 
     border-top: 2px dashed var(--black);
     border-bottom: 2px dashed var(--black);
-    max-width: 1000px;
+    max-width: 1400px;
 
 
 }
@@ -241,6 +285,7 @@ li:before {
 .container {
     background-color: var(--secondary);
     width: 100%;
+    position: relative;
 }
 
 .form {
@@ -262,6 +307,7 @@ li:before {
     width: 17rem;
 }
 
+
 .button:hover {
     background-color: var(--black);
     ;
@@ -271,6 +317,8 @@ li:before {
     color: var(--black);
     ;
 }
+
+button:focus {outline:0;}
 /* styles for radio button flexbox   */
 .item-container {
     display: flex;
@@ -282,22 +330,26 @@ li:before {
     counter-reset: section;
     position: relative;
     background-color: var(--tertiary);
-    max-width: 1000px;
+    max-width: 1400px;
 }
 
 .display {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width: 20rem;
-    margin: 0rem 1rem;
+    width: 18rem;
+    margin: 2rem;
 }
 
 
 .formtext {
     height: 5.5rem;
     font-weight: 900;
+    padding: 0 0 7rem 0;
+    margin: 0;
+
 }
+
 /*----end of  styles for radio button flexbox ----------  */
 /* ----------styles for radio buttons--------- */
 .rb-container {
@@ -321,8 +373,8 @@ li:before {
 }
 
 .rb .rb-field {
-    width: 3.4rem;
-    height: 3.4rem;
+    width: 3rem;
+    height: 3rem;
     background-color: white;
     position: relative;
     border: 2px solid var(--black);
@@ -344,19 +396,23 @@ li:before {
 }
 
 .rb.fill input:checked+span:before {
-    width: 70%;
-    height: 70%;
+
+    width: 71%;
+    height: 71%;
     top: 15%;
     left: 15%;
+
 }
 
 .rb.fill .rb-field:before {
     content: '';
     position: absolute;
+
     width: 0;
     height: 0;
     top: 50%;
     left: 50%;
+
     background-color: var(--black);
     ;
     border-radius: 100%;
@@ -411,7 +467,7 @@ li:before {
 /* -----------------tooltip ------------*/
 .tool {
     position: absolute;
-    top: 67.5rem;
+    top: 70.7rem;
     margin-left: -2.3rem;
 }
 
@@ -507,7 +563,7 @@ li:before {
 }
 
 .backgroundred {
-    background-color: #f9e3df !important;
+    background-color: #f9e3df;
 }
 
 /*----------------- Select box dropdown styles -----------  */
@@ -562,7 +618,7 @@ input {
 }
 
 .focus {
-    background-color: #f8ffd4;
+    background-color: #eaffea;
 }
 
 .red {
@@ -619,3 +675,54 @@ input {
 }
 
 /* ------------ end of popup css ---------------- */
+/* ------------ some media querires ---------------- */
+
+@media only screen and (max-width: 900px) {
+    .contentitems{
+        min-width: 20rem;
+    }
+    .leftnav li:first-child{
+        margin-left: 2rem;
+    }
+    .leftnav li:last-child{
+        margin-right: 1rem;
+    }
+    h1{
+        width: 12rem;
+    }
+    fieldset{
+        min-width: 20rem;
+    }
+    .container{
+        padding-bottom: 8rem;
+    }
+    .formcontainer{
+        width: 100%;
+    }
+    .contact-form{
+        width: 100%;
+    }
+    .forminput{
+        flex-direction: column;
+        align-content: flex-start;
+        align-items: flex-start;
+        margin-bottom: 3rem;
+
+    }
+    .input-text{
+        padding: 1rem 0;
+    }
+    .error{
+        align-self: flex-start;
+        align-content: flex-start;
+
+      }
+
+     .select-style {
+         margin-top: -1rem;
+         padding: 0;
+         }
+    .tool{
+        top: 76rem;
+    }
+}
