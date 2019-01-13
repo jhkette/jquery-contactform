@@ -171,12 +171,12 @@ function switchToolTip() {
         },
     });
 }
-// function to add pale red background. Is called by validation function if there is an error
+/* function to add pale red background. Is called by validation function if there is an error */
 function addRedError(field) {
     field.addClass('backgroundred');
 }
 
-// function to remove red background. again this is called by validation function - if input is valid
+/* function to remove red background. again this is called by validation function - if input is valid */
 function removeRedError(field) {
     field.removeClass('backgroundred');
 }

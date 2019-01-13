@@ -36,8 +36,6 @@ p {
     font-size: 1.8rem
 }
 
-
-
 h1 {
 
     color: white;
@@ -66,20 +64,7 @@ h4 {
 
 
 
-.row {
-    width: 75%;
-    margin: auto;
-    padding: 1.8rem;
-    max-width: 1400px;
-}
 
-.row-numbers{
-    width: 75%;
-    margin: auto;
-    padding: 0rem;
-    max-width: 1400px;
-
-}
 
 /*---------------- Main navigation ------------- */
 .main-nav {
@@ -244,6 +229,7 @@ border-bottom: 2px solid white;
     z-index: 10;
     opacity: .15;
     background-color: rgb(6, 122, 18);
+    overflow: hidden;
 
 }
 
@@ -340,6 +326,21 @@ button:focus {outline:0;}
     font-weight: 900;
     padding: 0 0 7rem 0;
     margin: 0;
+
+}
+
+.row {
+    width: 75%;
+    margin: auto;
+    padding: 1.8rem;
+    max-width: 1400px;
+}
+
+.row-numbers{
+    width: 75%;
+    margin: auto;
+    padding: 0rem;
+    max-width: 1400px;
 
 }
 
@@ -716,6 +717,9 @@ input {
          padding: 0;
          }
     .tool{
-        top: 76rem;
+        top: 80.3rem;
+    }
+    .main-nav{
+        padding: 2rem 0;
     }
 }
