@@ -50,12 +50,12 @@ function validateField(field, id) {
             case (id == 'first-name'):
                 removeNameFocus(); // remove initial focus on first name as the user has entered something in this field
                 re = new RegExp(/^[A-Za-z]{2,}$/i);
-                defaultText = 'A first name should only contain letters';
+                defaultText = 'Your first name should be at least two charecters and only contain letters';
                 break;
 
             case (id == 'second-name'):
                 re = new RegExp(/^[a-z][a-z-]{1,}$/i);
-                defaultText = 'A second name should only contain letters or a hyphen';
+                defaultText = 'Your second name should be at least two charecters and only contain letters or a hyphen';
                 break;
 
             case (id == 'email'):
@@ -70,7 +70,7 @@ function validateField(field, id) {
 
             case (id == 'telephone'):
                 re = new RegExp(/^\d{11}$/);
-                defaultText = 'This is not a valid telephone number. Only digits are allowed';
+                defaultText = 'This is not a valid telephone number. It should be eleven digits.';
                 break;
         }
         /* I'm only validating the telephone field if there is an entry. If a user has focused on field but left it empty,  I am simply ignoring it, it is considered de facto valid.
