@@ -12,7 +12,7 @@ $(document).ready(function() {
     nameHint(firstName, 'Enter your name');
     nameHint(email, 'Enter your email');
     switchToolTip();
-    /*The on function here allows me to attach two different user events to each element in 'input-text' */
+    /*The on function here allows me to attach two different events to each element in 'input-text' */
     $('.input-text').on({
         'blur': function() {
             var field = $(this);
@@ -74,7 +74,7 @@ function validateField(field, id) {
                 break;
         }
         /* I'm only validating the telephone field if there is an entry. If a user has focused on field but left it empty,  I am simply ignoring it, it is considered de facto valid.
-        This is because it is not mandatory. However, if there is an entry and it is incorrect an incorrect an error will show.  */
+        This is because it is not mandatory. However, if there is an entry and it is incorrect an error will show.  */
         if (id == 'telephone') {
             if (field.val() !== '') {
                 if (re.test(field.val())) {
@@ -121,7 +121,7 @@ function processForm() {
     }
 }
 
-/* function to show first name hint. It removes hint on focus and re-add hint on blur if field is left empty*/
+/* function to show first name hint. It removes hint on focus and re-adds the hint on blur, if the field is left empty*/
 function nameHint(field, message) {
     field.val(message);
     field.css('color', '#A8A8A8');
