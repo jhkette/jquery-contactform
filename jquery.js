@@ -1,4 +1,8 @@
-// Joseph Ketterer / Javascript / Part 2
+/* Joseph Ketterer
+JKETTE01
+Javascript
+Tobi Brodie
+*/
 
 /* I am using the jquery document.ready to load all the function and assign all the variables that are needed
 for the programme to run on page load  */
