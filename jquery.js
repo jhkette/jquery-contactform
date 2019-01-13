@@ -7,7 +7,6 @@ Tobi Brodie
 /* I am using the jquery document.ready to load all the function and assign all the variables that are needed
 for the programme to run on page load  */
 $(document).ready(function() {
-
     var firstName = $('#first-name');
     var email = $('#email');
     nameHint(firstName, 'Enter your name');
@@ -51,27 +50,27 @@ function validateField(field, id) {
             case (id == 'first-name'):
                 removeNameFocus(); // remove initial focus on first name as the user has entered something in this field
                 re = new RegExp(/^[A-Za-z]{2,}$/i);
-                defaultText = 'This is not a valid first name';
+                defaultText = 'A first name should only contain letters';
                 break;
 
             case (id == 'second-name'):
                 re = new RegExp(/^[a-z][a-z-]{1,}$/i);
-                defaultText = 'This is not a valid second name';
+                defaultText = 'A second name should only contain letters or a hyphen';
                 break;
 
             case (id == 'email'):
                 re = new RegExp(/^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/);
-                defaultText = 'This is not a valid email';
+                defaultText = 'This is not a valid format for an email';
                 break;
 
             case (id == 'health'):
                 re = new RegExp(/^(ZHA)(\d{6})$/);
-                defaultText = 'This is not a valid ZHA number';
+                defaultText = 'This should be the letters ZHA followed by six digits.';
                 break;
 
             case (id == 'telephone'):
                 re = new RegExp(/^\d{11}$/);
-                defaultText = 'This is not a valid telephone number';
+                defaultText = 'This is not a valid telephone number. Only digits are allowed';
                 break;
         }
         /* I'm only validating the telephone field if there is an entry. If a user has focused on field but left it empty,  I am simply ignoring it, it is considered de facto valid.
@@ -99,7 +98,6 @@ function validateField(field, id) {
         }
     }
 }
-
 
 /* function to process form and call modal popup if valid - else return error. It loops through all fields and calls validateField for each form field.
 If one returns one returns valid == false, the form does not get submitted. */
